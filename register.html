@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vendor Registration | Air Arabian Travels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-red: #C0392B;
+      --dark-red: #8B0000;
+      --gold: #FFD700;
+      --gold-dark: #FFA500;
+      --gold-gradient: linear-gradient(135deg, #FFD700, #FFA500);
+      --red-gradient: linear-gradient(135deg, #8B0000, #C0392B);
+      --dark-bg: #0a0a0a;
+      --dark-card: #1a1a1a;
+      --white: #FFFFFF;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: var(--dark-bg);
+      animation: fadeIn 0.6s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .auth-wrapper {
+      min-height: 100vh;
+      display: flex;
+      position: relative;
+    }
+
+    .back-home {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      z-index: 5;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .back-home:hover {
+      color: #ffe666;
+    }
+
+    .left-panel,
+    .right-panel {
+      width: 50%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem;
+    }
+
+    .left-panel {
+      background: linear-gradient(145deg, #8B0000 0%, #0a0a0a 70%);
+      color: #fff;
+    }
+
+    .left-content {
+      max-width: 470px;
+    }
+
+    .left-content img {
+      height: 80px;
+      width: auto;
+    }
+
+    .gold-text {
+      color: var(--gold);
+    }
+
+    .left-content p {
+      color: rgba(255, 255, 255, 0.82);
+      margin-top: 10px;
+    }
+
+    .benefit-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 22px;
+      margin-bottom: 0;
+    }
+
+    .benefit-list li {
+      color: #fff;
+      margin-bottom: 11px;
+      font-weight: 500;
+    }
+
+    .benefit-list li::before {
+      content: "✓";
+      color: var(--gold);
+      margin-right: 10px;
+      font-weight: 700;
+    }
+
+    .right-panel {
+      background: #fff;
+      color: #151515;
+      align-items: flex-start;
+      overflow-y: auto;
+    }
+
+    .form-card {
+      width: 100%;
+      max-width: 660px;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: #2e2e2e;
+      margin-bottom: 0.4rem;
+    }
+
+    .form-control {
+      height: 48px;
+      border-radius: 10px;
+    }
+
+    .form-control:focus,
+    .form-check-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.2);
+    }
+
+    .is-invalid {
+      border-color: #dc3545 !important;
+    }
+
+    .file-upload {
+      border: 1px dashed #b0b0b0;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .preview-box {
+      border: 1px dashed #c7c7c7;
+      border-radius: 12px;
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8a8a8a;
+      font-size: 0.9rem;
+      background: #fafafa;
+      overflow: hidden;
+    }
+
+    .preview-box img {
+      width: 100%;
+      max-height: 140px;
+      object-fit: contain;
+    }
+
+    .terms-link {
+      color: var(--gold-dark);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .terms-link:hover {
+      color: var(--gold);
+    }
+
+    .btn-gold {
+      background: var(--gold-gradient);
+      color: #000;
+      font-weight: 700;
+      border: none;
+      height: 50px;
+      border-radius: 10px;
+    }
+
+    .btn-gold:hover {
+      color: #000;
+      filter: brightness(1.03);
+    }
+
+    .secure-note {
+      color: #6c757d;
+      font-size: 0.9rem;
+      margin-top: 10px;
+      margin-bottom: 0;
+      text-align: center;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 14px;
+      margin-bottom: 0;
+    }
+
+    .login-link a {
+      color: var(--primary-red);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      color: var(--dark-red);
+    }
+
+    @media (max-width: 991.98px) {
+      .auth-wrapper {
+        flex-direction: column;
+      }
+
+      .left-panel,
+      .right-panel {
+        width: 100%;
+        min-height: auto;
+      }
+
+      .left-panel {
+        padding: 5.5rem 1.25rem 2.5rem;
+      }
+
+      .right-panel {
+        padding: 0 1.25rem 2.5rem;
+      }
+
+      .form-card {
+        padding-top: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="back-home" href="../index.html">← Back to Home</a>
+  <main class="auth-wrapper">
+    <section class="left-panel">
+      <div class="left-content">
+        <img src="../assets/images/logo.png" height="45" style="object-fit:contain;">
+        <h2 class="fw-bold gold-text">Join Our Network</h2>
+        <p>Become a verified travel agent and access exclusive fares.</p>
+        <ul class="benefit-list">
+          <li>Free Registration</li>
+          <li>Real-time ticket inventory</li>
+          <li>Dedicated support</li>
+          <li>Balance &amp; ledger tracking</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="right-panel">
+      <div class="form-card">
+        <h2 class="fw-bold mb-1">Vendor Registration</h2>
+        <p class="text-secondary mb-4">Fill the form — admin will approve within 24 hours</p>
+
+        <form id="registerForm" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label" for="agencyName">Agency Name*</label>
+              <input type="text" class="form-control required-field" id="agencyName" name="agency_name">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="ownerName">Owner Name*</label>
+              <input type="text" class="form-control required-field" id="ownerName" name="owner_name">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="mobile">Mobile Number*</label>
+              <input type="tel" class="form-control required-field" id="mobile" name="mobile">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="whatsapp">WhatsApp Number*</label>
+              <input type="tel" class="form-control required-field" id="whatsapp" name="whatsapp">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="city">City*</label>
+              <input type="text" class="form-control required-field" id="city" name="city">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="email">Email*</label>
+              <input type="email" class="form-control required-field" id="email" name="email">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="password">Password*</label>
+              <input type="password" class="form-control required-field" id="password" name="password">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label" for="confirmPassword">Confirm Password*</label>
+              <input type="password" class="form-control required-field" id="confirmPassword" name="confirm_password">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label" for="agencyLogo">Choose Logo</label>
+              <div class="row g-3">
+                <div class="col-md-7">
+                  <div class="file-upload">
+                    <input type="file" class="form-control" id="agencyLogo" name="logo" required accept="image/*">
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div id="previewBox" class="preview-box">Logo preview</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-check mt-1">
+                <input class="form-check-input required-check" type="checkbox" id="termsCheck">
+                <label class="form-check-label" for="termsCheck">
+                  I agree to <a href="#" class="terms-link">Terms &amp; Conditions</a>
+                </label>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-gold w-100">Submit Application</button>
+              <p class="secure-note">🔒 Your information is safe and secure</p>
+              <p class="login-link"><a href="login.html">Already registered? Login here →</a></p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const form = document.querySelector('form');
+      if(!form) return;
+
+      const logoInput = document.getElementById('agencyLogo');
+      const previewBox = document.getElementById('previewBox');
+      if (logoInput && previewBox) {
+        logoInput.addEventListener('change', () => {
+          const file = logoInput.files[0];
+          if (!file) {
+            previewBox.textContent = 'Logo preview';
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            previewBox.innerHTML = '<img src="' + e.target.result + '" alt="Logo Preview">';
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        let valid = true;
+        let errors = [];
+
+        form.querySelectorAll('input, select').forEach((el) => {
+          if (el.type !== 'checkbox') {
+            el.style.border = '1px solid #ddd';
+          }
+        });
+
+        // Agency Name
+        const agency = form.querySelector('input[name="agency_name"]') || form.querySelectorAll('input')[0];
+        if(!agency?.value || agency.value.trim().length < 3){
+          errors.push('Agency Name must be at least 3 characters');
+          if(agency) agency.style.border='2px solid #C0392B';
+          valid = false;
+        }
+
+        // Owner Name
+        const owner = form.querySelector('input[name="owner_name"]') || form.querySelectorAll('input')[1];
+        if(!owner?.value || owner.value.trim().length < 3){
+          errors.push('Owner Name must be at least 3 characters');
+          if(owner) owner.style.border='2px solid #C0392B';
+          valid = false;
+        }
+
+        // Mobile validation
+        const mobile = form.querySelector('input[name="mobile"]') || form.querySelector('input[placeholder*="mobile"]') || form.querySelector('input[placeholder*="Mobile"]') || form.querySelectorAll('input')[2];
+        const mobileRegex = /^03[0-9]{9}$/;
+        if(!mobile?.value || !mobileRegex.test(mobile.value)){
+          errors.push('Mobile must be 11 digits starting with 03');
+          if(mobile) mobile.style.border='2px solid #C0392B';
+          valid = false;
+        }
+
+        // WhatsApp
+        const whatsapp = form.querySelector('input[name="whatsapp"]') || form.querySelectorAll('input')[3];
+        const waRegex = /^[0-9]{11}$/;
+        if(!whatsapp?.value || !waRegex.test(whatsapp.value)){
+          errors.push('WhatsApp must be 11 digits');
+          if(whatsapp) whatsapp.style.border='2px solid #C0392B';
+          valid = false;
+        }
+
+        // City
+        const city = form.querySelector('input[name="city"]') || form.querySelectorAll('input')[4];
+        if(!city?.value || !city.value.trim()){
+          errors.push('City is required');
+          if(city) city.style.border='2px solid #C0392B';
+          valid = false;
+        }
+
+        // Email validation
+        const email = form.querySelector('input[type="email"]');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(!email?.value || !emailRegex.test(email.value)){
+          errors.push('Please enter valid email');
+          if(email) email.style.border='2px solid #C0392B';
+          valid = false;
+        }
+
+        // Password validation
+        const pass = form.querySelector('input[name="password"]') || form.querySelector('input[type="password"]');
+        const passRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if(!pass?.value || !passRegex.test(pass.value)){
+          errors.push('Password must be at least 8 characters with letters and numbers');
+          if(pass) pass.style.border='2px solid #C0392B';
+          valid = false;
+        }
+
+        // Confirm password
+        const passes = form.querySelectorAll('input[type="password"]');
+        if(passes.length >= 2 && passes[0].value !== passes[1].value){
+          errors.push('Passwords do not match');
+          passes[1].style.border='2px solid #C0392B';
+          valid = false;
+        }
+
+        // Logo
+        const logo = form.querySelector('input[type="file"]');
+        if(!logo || !logo.files || logo.files.length === 0){
+          errors.push('Logo file is required');
+          if(logo) logo.style.border='2px solid #C0392B';
+          valid = false;
+        }
+
+        // Terms checkbox
+        const terms = form.querySelector('input[type="checkbox"]');
+        if(terms && !terms.checked){
+          errors.push('Please agree to Terms & Conditions');
+          valid = false;
+        }
+
+        if(!valid){
+          alert('Please fix these errors:\n\n' + errors.join('\n'));
+          return;
+        }
+
+        alert('Application submitted successfully!\n\n'+
+        'Admin will review your application\n'+
+        'within 24 hours.\n\n'+
+        'You will receive an email notification\n'+
+        'once your account is approved.\n\n'+
+        'Please do NOT login until you receive\n'+
+        'approval email.');
+
+        window.location.href = 'login.html';
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
