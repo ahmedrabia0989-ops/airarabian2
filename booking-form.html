@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Form | Air Arabian Travels</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body{font-family:Poppins,sans-serif;background:#f5f5f5;margin:0}
+    .wrap{max-width:1100px;margin:30px auto;background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:20px}
+    .gold-label{color:#FFD700;font-weight:700}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <h3 class="mb-3">Booking Form</h3>
+
+  <div id="passengersContainer">
+    <div class="passenger-row" id="passenger-1">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 style="color:#8B0000;font-weight:700;">Passenger 1 (Lead)</h5>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-2">
+          <label class="form-label gold-label">Title*</label>
+          <select class="form-select" required>
+            <option value="">Title</option><option>Mr</option><option>Mrs</option><option>Ms</option><option>Miss</option><option>Mast</option><option>Dr</option>
+          </select>
+        </div>
+        <div class="col-md-3"><label class="form-label gold-label">First Name*</label><input type="text" class="form-control" placeholder="First Name" required></div>
+        <div class="col-md-3"><label class="form-label gold-label">Last Name*</label><input type="text" class="form-control" placeholder="Last Name" required></div>
+        <div class="col-md-2"><label class="form-label gold-label">Gender*</label><select class="form-select" required><option value="">Gender</option><option>Male</option><option>Female</option></select></div>
+        <div class="col-md-2"><label class="form-label gold-label">Type*</label><select class="form-select" required><option value="">Type</option><option value="adult">Adult</option><option value="child">Child</option><option value="infant">Infant</option></select></div>
+        <div class="col-md-3"><label class="form-label gold-label">CNIC/Passport*</label><input type="text" class="form-control" placeholder="CNIC or Passport No"></div>
+        <div class="col-md-3"><label class="form-label gold-label">Date of Birth*</label><input type="date" class="form-control"></div>
+        <div class="col-md-3"><label class="form-label gold-label">Phone*</label><input type="text" class="form-control" placeholder="03xxxxxxxxx" required></div>
+        <div class="col-md-3"><label class="form-label gold-label">Email</label><input type="email" class="form-control" placeholder="email@example.com"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <button type="button" onclick="addPassenger()" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;border:none;padding:8px 20px;border-radius:8px;">+ Add Passenger</button>
+  </div>
+
+  <div class="mt-4 p-3" style="border:1px solid #FFD700;border-radius:8px;">
+    <h5 style="color:#FFD700;font-weight:700;">Flight Class & Seat</h5>
+    <div class="row g-3 mt-1">
+      <div class="col-md-4">
+        <label class="form-label">Class/Package*</label>
+        <select class="form-select" id="classSelect" required onchange="updatePrice()">
+          <option value="">Select Class</option>
+          <option value="90000">Economy Class - PKR 90,000</option>
+          <option value="150000">Business Class - PKR 150,000</option>
+          <option value="180000">Umrah Package - PKR 180,000</option>
+          <option value="250000">Umrah Premium - PKR 250,000</option>
+        </select>
+      </div>
+      <div class="col-md-4"><label class="form-label">Seat Preference</label><select class="form-select"><option>No Preference</option><option>Window Seat</option><option>Aisle Seat</option><option>Middle Seat</option></select></div>
+      <div class="col-md-4"><label class="form-label">Meal Preference</label><select class="form-select"><option>No Preference</option><option>Vegetarian</option><option>Halal</option><option>No Meal</option></select></div>
+    </div>
+  </div>
+
+  <div class="mt-4 p-3" style="border:1px solid #eee;border-radius:8px;">
+    <div class="d-flex justify-content-between"><span>Total Amount</span><strong id="totalAmount">PKR 0</strong></div>
+    <div class="d-flex justify-content-between"><span>Service Charge</span><strong id="serviceCharge">PKR 0</strong></div>
+    <div class="d-flex justify-content-between"><span>Grand Total</span><strong id="grandTotal">PKR 0</strong></div>
+  </div>
+
+  <div class="mt-4">
+    <button type="button" onclick="confirmBooking()" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;border:none;padding:12px 40px;border-radius:8px;font-size:16px;width:100%;">Confirm Booking & Proceed to Payment ?</button>
+  </div>
+</div>
+
+<script>
+let passengerCount = 1;
+function addPassenger(){
+  passengerCount++;
+  const container = document.getElementById('passengersContainer');
+  const div = document.createElement('div');
+  div.className = 'passenger-row mt-4 p-3';
+  div.style.border = '1px solid #FFD700';
+  div.style.borderRadius = '8px';
+  div.id = 'passenger-'+passengerCount;
+  div.innerHTML = `
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 style="color:#8B0000;font-weight:700;">Passenger ${passengerCount}</h5>
+    <button type="button" onclick="removePassenger('passenger-${passengerCount}')" style="background:#C0392B;color:#fff;border:none;padding:4px 12px;border-radius:6px;">Remove</button>
+  </div>
+  <div class="row g-3">
+    <div class="col-md-2"><select class="form-select" required><option value="">Title</option><option>Mr</option><option>Mrs</option><option>Ms</option><option>Miss</option><option>Mast</option><option>Dr</option></select></div>
+    <div class="col-md-3"><input type="text" class="form-control" placeholder="First Name" required></div>
+    <div class="col-md-3"><input type="text" class="form-control" placeholder="Last Name" required></div>
+    <div class="col-md-2"><select class="form-select" required><option value="">Gender</option><option>Male</option><option>Female</option></select></div>
+    <div class="col-md-2"><select class="form-select" required><option value="">Type</option><option value="adult">Adult</option><option value="child">Child</option><option value="infant">Infant</option></select></div>
+    <div class="col-md-3"><input type="text" class="form-control" placeholder="CNIC or Passport"></div>
+    <div class="col-md-3"><input type="date" class="form-control"></div>
+    <div class="col-md-3"><input type="text" class="form-control" placeholder="Phone"></div>
+    <div class="col-md-3"><input type="email" class="form-control" placeholder="Email"></div>
+  </div>`;
+  container.appendChild(div);
+  updatePrice();
+}
+
+function removePassenger(id){
+  const el = document.getElementById(id);
+  if(el) el.remove();
+  passengerCount--;
+  updatePrice();
+}
+
+function updatePrice(){
+  const classVal = parseInt(document.getElementById('classSelect').value) || 0;
+  const passengers = document.querySelectorAll('.passenger-row').length;
+  const total = classVal * passengers;
+  const serviceCharge = Math.round(total * 0.02);
+  const grandTotal = total + serviceCharge;
+
+  const totalEl = document.getElementById('totalAmount');
+  const serviceEl = document.getElementById('serviceCharge');
+  const grandEl = document.getElementById('grandTotal');
+
+  if(totalEl) totalEl.textContent = 'PKR '+total.toLocaleString();
+  if(serviceEl) serviceEl.textContent = 'PKR '+serviceCharge.toLocaleString();
+  if(grandEl) grandEl.textContent = 'PKR '+grandTotal.toLocaleString();
+}
+
+function confirmBooking(){
+  const required = document.querySelectorAll('[required]');
+  let valid = true;
+  required.forEach(i => {
+    if(!i.value){
+      i.style.border='2px solid #C0392B';
+      valid = false;
+    } else {
+      i.style.border='';
+    }
+  });
+  if(valid){
+    const invoice = 'AAT-'+Math.floor(Math.random()*90000+10000);
+    alert('Booking Confirmed!\n'+'Invoice: '+invoice+'\n'+'Redirecting to payment...');
+    window.location.href='payment.html';
+  } else {
+    alert('Please fill all required fields!');
+  }
+}
+</script>
+</body>
+</html>

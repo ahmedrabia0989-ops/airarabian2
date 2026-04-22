@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Payments | Air Arabian Travels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root{--primary-red:#C0392B;--dark-red:#8B0000;--gold:#FFD700;--gold-gradient:linear-gradient(135deg,#FFD700,#FFA500);--dark-bg:#0a0a0a;--soft-bg:#f5f5f5;}
+    body{margin:0;font-family:"Poppins",sans-serif;background:var(--soft-bg);} .sidebar{width:240px;position:fixed;inset:0 auto 0 0;background:var(--dark-bg);padding:16px 0;overflow-y:auto;z-index:1040;transition:transform .3s;}
+    .sidebar-logo{padding:0 18px 14px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:12px;} .sidebar-logo img{height:40px;}
+    .sidebar-nav{list-style:none;margin:0;padding:0;} .sidebar-link{display:flex;gap:10px;align-items:center;color:#fff;text-decoration:none;padding:11px 16px;border-left:3px solid transparent;}
+    .sidebar-link i{color:var(--gold);} .sidebar-link:hover,.sidebar-link.active{color:var(--gold);} .sidebar-link.active{border-left-color:var(--gold);background:rgba(255,215,0,.08);}
+    .content{margin-left:240px;min-height:100vh;} .topbar{background:#fff;padding:14px 24px;box-shadow:0 4px 14px rgba(0,0,0,.08);position:sticky;top:0;z-index:1020;}
+    .clock-pill{background:var(--gold-gradient);padding:8px 14px;border-radius:999px;font-weight:700;} .admin-badge{background:var(--primary-red);color:#fff;padding:6px 10px;border-radius:999px;font-weight:700;font-size:.72rem;}
+    .main{padding:22px;} .card-box{background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:18px;}
+    .stat-card{background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:16px;} .admin-table thead th{background:var(--dark-red);color:var(--gold);border:none;white-space:nowrap;font-size:.82rem;}
+    .admin-table td{vertical-align:middle;font-size:.84rem;white-space:nowrap;} .btn-verify{background:var(--gold-gradient);border:none;color:#111;font-weight:700;}
+    .sidebar-toggle{display:none;border:none;background:transparent;font-size:1.35rem;} .sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1035;}
+    @media (max-width:991.98px){.sidebar{transform:translateX(-100%);} .sidebar.open{transform:translateX(0);} .content{margin-left:0;} .sidebar-toggle{display:inline-flex;} .sidebar-backdrop.show{display:block;} .topbar{padding:12px 14px;} .main{padding:15px;}}
+  </style>
+</head>
+<body>
+  <aside class="sidebar" id="adminSidebar">
+    <div class="sidebar-logo"><img src="../assets/images/logo.png" height="45" style="object-fit:contain;"></div>
+    <ul class="sidebar-nav">
+      <li><a class="sidebar-link" href="dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a class="sidebar-link" href="vendors.html"><i class="bi bi-people"></i>Manage Vendors</a></li>
+      <li><a class="sidebar-link" href="manage-users.html"><i class="bi bi-person-gear"></i>Manage Users</a></li>
+      <li><a class="sidebar-link" href="tickets.html"><i class="bi bi-ticket-perforated"></i>Manage Tickets</a></li>
+      <li><a class="sidebar-link" href="bookings.html"><i class="bi bi-journal-check"></i>Manage Bookings</a></li>
+      <li><a class="sidebar-link active" href="payments.html"><i class="bi bi-cash-coin"></i>Verify Payments</a></li>
+      <li><a class="sidebar-link" href="reports.html"><i class="bi bi-graph-up"></i>Reports</a></li>
+      <li><a class="sidebar-link" href="settings.html"><i class="bi bi-gear"></i>Settings</a></li>
+      <li><a class="sidebar-link" href="../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+    </ul>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+  <div class="content">
+    <header class="topbar">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="d-flex align-items-center gap-2"><button class="sidebar-toggle" id="sidebarToggle"><i class="bi bi-list"></i></button><h1 class="h5 fw-bold m-0">Admin Dashboard</h1></div>
+        <div class="d-flex align-items-center gap-2"><span class="clock-pill" id="liveClock"></span><span class="admin-badge">ADMIN</span><span class="fw-semibold">Muneeb Ahmed</span></div>
+      </div>
+    </header>
+    <main class="main">
+      <h2 class="h4 fw-bold mb-3">Verify Payments</h2>
+      <section class="row g-3 mb-3">
+        <div class="col-xl-3 col-md-6"><article class="stat-card"><p class="text-muted mb-1">Pending</p><h3 class="h4 mb-0" style="color:#fd7e14;">5</h3></article></div>
+        <div class="col-xl-3 col-md-6"><article class="stat-card"><p class="text-muted mb-1">Verified Today</p><h3 class="h4 mb-0" style="color:#FFA500;">12</h3></article></div>
+        <div class="col-xl-3 col-md-6"><article class="stat-card"><p class="text-muted mb-1">Rejected</p><h3 class="h4 mb-0" style="color:#dc3545;">2</h3></article></div>
+        <div class="col-xl-3 col-md-6"><article class="stat-card"><p class="text-muted mb-1">Total Amount</p><h3 class="h4 mb-0" style="color:#198754;">PKR 2.3M</h3></article></div>
+      </section>
+      <div class="card-box">
+        <div class="table-responsive">
+          <table class="table admin-table align-middle mb-0">
+            <thead><tr><th>SR</th><th>INVOICE</th><th>VENDOR</th><th>AMOUNT</th><th>METHOD</th><th>RECEIPT</th><th>DATE</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>AAT-1201</td><td>Air Arabian Travel</td><td>PKR 85,000</td><td>Bank Transfer</td><td><button class="btn btn-link p-0" onclick="viewReceipt(this)">View Receipt</button></td><td>20-Apr-2026</td><td><span class="badge bg-warning text-dark">Pending</span></td><td><button class="btn btn-sm btn-verify" onclick="verifyPayment(this)">Verify</button> <button class="btn btn-sm btn-danger" onclick="rejectPayment(this)">Reject</button></td></tr>
+              <tr><td>2</td><td>AAT-1198</td><td>Sky Tours</td><td>PKR 525,000</td><td>JazzCash</td><td><button class="btn btn-link p-0" onclick="viewReceipt(this)">View Receipt</button></td><td>19-Apr-2026</td><td><span class="badge bg-success">Verified</span></td><td><button class="btn btn-sm btn-primary">View</button></td></tr>
+              <tr><td>3</td><td>AAT-1195</td><td>Al-Noor Agency</td><td>PKR 92,000</td><td>EasyPaisa</td><td><button class="btn btn-link p-0" onclick="viewReceipt(this)">View Receipt</button></td><td>19-Apr-2026</td><td><span class="badge bg-warning text-dark">Pending</span></td><td><button class="btn btn-sm btn-verify" onclick="verifyPayment(this)">Verify</button> <button class="btn btn-sm btn-danger" onclick="rejectPayment(this)">Reject</button></td></tr>
+              <tr><td>4</td><td>AAT-1194</td><td>Bismillah Tours</td><td>PKR 180,000</td><td>Bank Transfer</td><td><button class="btn btn-link p-0" onclick="viewReceipt(this)">View Receipt</button></td><td>18-Apr-2026</td><td><span class="badge bg-success">Verified</span></td><td><button class="btn btn-sm btn-primary">View</button></td></tr>
+              <tr><td>5</td><td>AAT-1193</td><td>Rehman Travels</td><td>PKR 105,000</td><td>JazzCash</td><td><button class="btn btn-link p-0" onclick="viewReceipt(this)">View Receipt</button></td><td>18-Apr-2026</td><td><span class="badge bg-warning text-dark">Pending</span></td><td><button class="btn btn-sm btn-verify" onclick="verifyPayment(this)">Verify</button> <button class="btn btn-sm btn-danger" onclick="rejectPayment(this)">Reject</button></td></tr>
+              <tr><td>6</td><td>AAT-1192</td><td>Madina Tours</td><td>PKR 76,000</td><td>EasyPaisa</td><td><button class="btn btn-link p-0" onclick="viewReceipt(this)">View Receipt</button></td><td>17-Apr-2026</td><td><span class="badge bg-danger">Rejected</span></td><td><button class="btn btn-sm btn-primary">View</button></td></tr>
+              <tr><td>7</td><td>AAT-1191</td><td>Falcon Travel</td><td>PKR 199,000</td><td>Bank Transfer</td><td><button class="btn btn-link p-0" onclick="viewReceipt(this)">View Receipt</button></td><td>17-Apr-2026</td><td><span class="badge bg-success">Verified</span></td><td><button class="btn btn-sm btn-primary">View</button></td></tr>
+              <tr><td>8</td><td>AAT-1190</td><td>Al-Falah Travels</td><td>PKR 88,000</td><td>JazzCash</td><td><button class="btn btn-link p-0" onclick="viewReceipt(this)">View Receipt</button></td><td>16-Apr-2026</td><td><span class="badge bg-warning text-dark">Pending</span></td><td><button class="btn btn-sm btn-verify" onclick="verifyPayment(this)">Verify</button> <button class="btn btn-sm btn-danger" onclick="rejectPayment(this)">Reject</button></td></tr>
+              <tr><td>9</td><td>AAT-1189</td><td>Al-Haram Travels</td><td>PKR 240,000</td><td>Bank Transfer</td><td><button class="btn btn-link p-0" onclick="viewReceipt(this)">View Receipt</button></td><td>16-Apr-2026</td><td><span class="badge bg-success">Verified</span></td><td><button class="btn btn-sm btn-primary">View</button></td></tr>
+              <tr><td>10</td><td>AAT-1188</td><td>Rahmania Agency</td><td>PKR 69,000</td><td>EasyPaisa</td><td><button class="btn btn-link p-0" onclick="viewReceipt(this)">View Receipt</button></td><td>15-Apr-2026</td><td><span class="badge bg-warning text-dark">Pending</span></td><td><button class="btn btn-sm btn-verify" onclick="verifyPayment(this)">Verify</button> <button class="btn btn-sm btn-danger" onclick="rejectPayment(this)">Reject</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal fade" id="receiptModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header"><h3 class="modal-title h5 fw-bold">Payment Receipt</h3><button class="btn-close" data-bs-dismiss="modal"></button></div>
+        <div class="modal-body">
+          <div class="bg-secondary-subtle border rounded d-flex align-items-center justify-content-center mb-3" style="height:200px;">Receipt Image Placeholder</div>
+          <p class="mb-1"><strong>Invoice:</strong> AAT-1201</p>
+          <p class="mb-1"><strong>Vendor:</strong> Air Arabian Travel</p>
+          <p class="mb-1"><strong>Method:</strong> Bank Transfer</p>
+          <p class="mb-0"><strong>Amount:</strong> PKR 85,000</p>
+        </div>
+        <div class="modal-footer"><button class="btn btn-verify">Verify</button><button class="btn btn-danger">Reject</button></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const liveClock=document.getElementById("liveClock"),dayNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"],pad=n=>String(n).padStart(2,"0");
+    function updateClock(){const now=new Date();liveClock.textContent=dayNames[now.getDay()]+" "+pad(now.getHours())+":"+pad(now.getMinutes())+":"+pad(now.getSeconds())+" | "+monthNames[now.getMonth()]+" "+now.getDate()+"/"+now.getFullYear();}
+    updateClock();setInterval(updateClock,1000);
+    const sidebar=document.getElementById("adminSidebar"),toggle=document.getElementById("sidebarToggle"),backdrop=document.getElementById("sidebarBackdrop");
+    function closeSidebar(){sidebar.classList.remove("open");backdrop.classList.remove("show");}
+    toggle.addEventListener("click",()=>{sidebar.classList.toggle("open");backdrop.classList.toggle("show");});backdrop.addEventListener("click",closeSidebar);window.addEventListener("resize",()=>{if(window.innerWidth>991){closeSidebar();}});
+    function verifyPayment(btn){
+      if(confirm('Verify this payment?')){
+        const row = btn.closest('tr');
+        const badge = row.querySelector('.badge');
+        if(badge){ badge.textContent='Verified'; badge.style.background='#FFD700'; badge.style.color='#000'; }
+        btn.closest('td').innerHTML='<span style="color:#FFD700;font-weight:700;">✓ Verified</span>';
+        alert('Payment Verified!');
+      }
+    }
+    function rejectPayment(btn){
+      if(confirm('Reject this payment?')){
+        const row = btn.closest('tr');
+        const badge = row.querySelector('.badge');
+        if(badge){ badge.textContent='Rejected'; badge.style.background='#C0392B'; badge.style.color='#fff'; }
+        btn.closest('td').innerHTML='<span style="color:#C0392B;font-weight:700;">✗ Rejected</span>';
+        alert('Payment Rejected!');
+      }
+    }
+    function viewReceipt(btn){
+      const row = btn.closest('tr');
+      alert('Receipt for Invoice: '+
+      row.cells[1].textContent+
+      '\nAmount: '+row.cells[3].textContent+
+      '\nMethod: '+row.cells[4].textContent);
+    }
+  </script>
+</body>
+</html>
+
+
+
+

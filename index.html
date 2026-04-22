@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Air Arabian Travels | Premium Travel Network</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-red: #C0392B;
+      --dark-red: #8B0000;
+      --gold: #FFD700;
+      --gold-dark: #FFA500;
+      --gold-gradient: linear-gradient(135deg, #FFD700, #FFA500);
+      --red-gradient: linear-gradient(135deg, #8B0000, #C0392B);
+      --dark-bg: #0a0a0a;
+      --dark-card: #1a1a1a;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: var(--dark-bg);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    .gold-text {
+      color: var(--gold);
+    }
+
+    .gradient-gold-text {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .btn-gold {
+      background: var(--gold-gradient);
+      color: #000;
+      font-weight: 700;
+      border: none;
+    }
+
+    .btn-gold:hover {
+      color: #000;
+      transform: translateY(-1px);
+      filter: brightness(1.03);
+    }
+
+    .btn-outline-gold {
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      font-weight: 600;
+      background: transparent;
+    }
+
+    .btn-outline-gold:hover {
+      background: var(--gold-gradient);
+      color: #000;
+      border-color: transparent;
+    }
+
+    .section-label {
+      color: var(--gold);
+      font-size: 0.83rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .site-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1030;
+      background: #0a0a0a;
+      padding: 15px 40px;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .site-navbar.scrolled {
+      background: #050505;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    }
+
+    .navbar-brand img {
+      height: 50px;
+      width: auto;
+    }
+
+    .nav-link {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--gold);
+    }
+
+    .navbar-toggler {
+      border: 1px solid rgba(255, 215, 0, 0.5);
+    }
+
+    .navbar-toggler:focus {
+      box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      background: radial-gradient(circle at 82% 40%, rgba(192, 57, 43, 0.38) 0%, rgba(10, 10, 10, 0.95) 45%), #0a0a0a;
+      padding: 120px 0 80px;
+      overflow: hidden;
+    }
+
+    .plane-silhouette {
+      position: absolute;
+      right: -5%;
+      top: 15%;
+      width: min(45vw, 560px);
+      height: min(40vw, 460px);
+      opacity: 0.16;
+      transform: rotate(-7deg);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      background: rgba(26, 26, 26, 0.88);
+      border-radius: 999px;
+      display: inline-block;
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 8vw, 64px);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 0;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin-top: 18px;
+      margin-bottom: 30px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 1rem;
+    }
+
+    .search-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.25);
+    }
+
+    .trip-mode {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid #ced4da;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #212529;
+      cursor: pointer;
+    }
+
+    .trip-mode input {
+      display: none;
+    }
+
+    .trip-mode.active {
+      background: var(--red-gradient);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .form-select,
+    .form-control {
+      min-height: 52px;
+      border-radius: 10px;
+    }
+
+    .form-select:focus,
+    .form-control:focus,
+    .form-control:focus-visible {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.2);
+    }
+
+    .search-btn {
+      min-height: 52px;
+      border-radius: 10px;
+      width: 100%;
+    }
+
+    .stats-bar {
+      margin-top: 18px;
+      background: var(--dark-red);
+      border-radius: 14px;
+      padding: 16px 14px;
+    }
+
+    .stat-number {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.24rem;
+      margin-bottom: 1px;
+    }
+
+    .stat-label {
+      color: #fff;
+      font-size: 0.86rem;
+      margin: 0;
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: fadeInUp 0.85s ease forwards;
+    }
+
+    .fade-in-up.delay-1 {
+      animation-delay: 0.15s;
+    }
+
+    .fade-in-up.delay-2 {
+      animation-delay: 0.3s;
+    }
+
+    .fade-in-up.delay-3 {
+      animation-delay: 0.45s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .destinations-section {
+      background: #fff;
+      color: #111;
+      padding: 80px 0;
+    }
+
+    .dest-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      height: 100%;
+    }
+
+    .dest-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold);
+    }
+
+    .dest-image-wrap {
+      position: relative;
+    }
+
+    .dest-image-wrap img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .badge-custom {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: #fff;
+    }
+
+    .badge-red {
+      background: var(--primary-red);
+    }
+
+    .badge-green {
+      background: #198754;
+    }
+
+    .badge-gold {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .location-pill {
+      font-size: 0.88rem;
+      color: #8d6a00;
+      font-weight: 500;
+    }
+
+    .price {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .price small {
+      color: #6c757d;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .umrah-section {
+      background: var(--dark-bg);
+      padding: 80px 0;
+    }
+
+    .feature-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .feature-icon {
+      background: var(--gold);
+      color: #fff;
+      min-width: 40px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .feature-item h6 {
+      margin-bottom: 5px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .feature-item p {
+      margin: 0;
+      color: #b8b8b8;
+      font-size: 0.9rem;
+    }
+
+    .package-card {
+      background: var(--dark-card);
+      border: 1px solid var(--gold);
+      border-radius: 16px;
+      padding: 30px;
+      height: 100%;
+    }
+
+    .check-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    .check-list li {
+      padding: 8px 0;
+      color: #fff;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      color: var(--gold);
+      margin-right: 10px;
+      font-weight: 700;
+    }
+
+    .vendor-section {
+      background: #111111;
+      padding: 80px 0;
+    }
+
+    .vendor-card {
+      background: var(--dark-card);
+      border: 2px solid var(--gold);
+      border-radius: 20px;
+      padding: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .plus-decoration {
+      position: absolute;
+      right: 18px;
+      top: 8px;
+      font-size: 80px;
+      line-height: 1;
+      color: var(--gold);
+      opacity: 0.1;
+      font-weight: 700;
+      pointer-events: none;
+    }
+
+    .agent-stat-box {
+      background: #101010;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      height: 100%;
+    }
+
+    .agent-stat-box h3 {
+      color: var(--gold);
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .contact-section {
+      background: var(--dark-bg);
+      padding: 80px 0;
+    }
+
+    .info-card,
+    .contact-form-card {
+      background: var(--dark-card);
+      border: 1px solid var(--gold);
+      border-radius: 16px;
+    }
+
+    .info-card {
+      padding: 22px;
+      height: 100%;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .info-icon {
+      color: var(--gold);
+      font-size: 1.25rem;
+      margin-top: 2px;
+    }
+
+    .contact-form-card {
+      padding: 30px;
+      margin-top: 28px;
+    }
+
+    .contact-form-card .form-control,
+    .contact-form-card .form-select {
+      background: #0f0f0f;
+      border: 1px solid #363636;
+      color: #fff;
+    }
+
+    .contact-form-card .form-control::placeholder {
+      color: #a0a0a0;
+    }
+
+    .site-footer {
+      background: #0a0a0a;
+      padding: 60px 0 0;
+    }
+
+    .footer-logo {
+      height: 45px;
+      width: auto;
+    }
+
+    .footer-title {
+      color: var(--gold);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    .social-link {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid #2a2a2a;
+      background: #121212;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-right: 8px;
+    }
+
+    .social-link:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .footer-divider {
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      margin-top: 30px;
+    }
+
+    .footer-bottom {
+      background: var(--dark-red);
+      padding: 12px 0;
+      margin-top: 18px;
+      font-size: 13px;
+    }
+
+    .footer-bottom p {
+      margin: 0;
+      color: #fff;
+    }
+
+    @media (max-width: 991.98px) {
+      .site-navbar {
+        padding: 12px 16px;
+      }
+
+      .hero {
+        padding-top: 100px;
+      }
+
+      .plane-silhouette {
+        width: min(65vw, 480px);
+        right: -16%;
+        top: 7%;
+      }
+
+      .vendor-card {
+        padding: 30px 22px;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      .hero-badge {
+        font-size: 0.78rem;
+      }
+
+      .trip-mode {
+        font-size: 0.84rem;
+      }
+
+      .stats-bar .col {
+        margin-bottom: 10px;
+      }
+
+      .footer-bottom .text-md-end {
+        text-align: left !important;
+        margin-top: 7px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg site-navbar">
+    <div class="container-fluid p-0">
+      <a class="navbar-brand" href="index.html" style="text-decoration:none;">
+        <img src="assets/images/logo.png" height="70" style="object-fit:contain;">
+        </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#destinations">Flights</a></li>
+          <li class="nav-item"><a class="nav-link" href="#umrah">Umrah</a></li>
+          <li class="nav-item"><a class="nav-link" href="#destinations">Tours</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+        <div class="d-flex flex-column flex-lg-row gap-2 ms-lg-4 mt-3 mt-lg-0">
+          <a href="auth/login.html" class="btn" style="border:2px solid #FFD700;color:#FFD700;border-radius:25px;padding:8px 20px;font-weight:600;">Agent Login</a>
+          <a href="auth/register.html" class="btn" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;border-radius:25px;padding:8px 20px;font-weight:700;">Become a Vendor</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="hero" data-aos="fade-up">
+    <svg class="plane-silhouette" viewBox="0 0 512 512" aria-hidden="true">
+      <path fill="#C0392B" d="M505 246.6L298.2 184l-67.1-158.2c-4.2-9.8-14.2-15.8-24.8-15.8-9.8 0-18.9 5-23.9 13.5L104.5 152.9 21.8 128c-8-2.4-16.7-1.2-23.8 3.4S-2.4 144.3.4 152l36.5 101.1L.4 354.1c-2.8 7.7-.1 16.2 6.8 20.8 4.4 3 9.6 4.5 14.7 4.5 3 0 5.9-.5 8.8-1.4l82.7-24.9 77.9 129.4c5 8.4 14.1 13.5 23.9 13.5 10.6 0 20.6-6.1 24.8-15.8L307 322.8 505 265.4c8.5-2.4 14.5-10.2 14.5-19.1 0-8.9-6-16.7-14.5-19.7z"></path>
+    </svg>
+    <div class="container hero-content">
+      <div class="hero-badge fade-in-up">✈ Pakistan's #1 Travel Network</div>
+      <h1 class="fade-in-up delay-1">Fly Smarter,</h1>
+      <h1 class="gradient-gold-text fade-in-up delay-2">Explore Further.</h1>
+      <p class="fade-in-up delay-3">
+        Premium flight tickets, Umrah packages, and exclusive tours to UAE, KSA, Oman, UK &amp; Europe — all in one place.
+      </p>
+
+      <div class="search-card" data-aos="fade-up">
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <label class="trip-mode active">
+            <input type="radio" name="tripMode" checked>
+            ✈ Flights
+          </label>
+          <label class="trip-mode">
+            <input type="radio" name="tripMode">
+            ☪ Umrah
+          </label>
+          <label class="trip-mode">
+            <input type="radio" name="tripMode">
+            🌍 Tours
+          </label>
+        </div>
+        <div class="row g-2 align-items-stretch">
+          <div class="col-lg-3 col-md-6">
+            <select class="form-select" aria-label="Destination">
+              <option selected>Destination</option>
+              <option>UAE</option>
+              <option>KSA</option>
+              <option>Oman</option>
+              <option>UK</option>
+              <option>Europe</option>
+              <option>Umrah</option>
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <select class="form-select" aria-label="Departure From">
+              <option selected>Departure From</option>
+              <option>Karachi</option>
+              <option>Lahore</option>
+              <option>Islamabad</option>
+              <option>Faisalabad</option>
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <input type="date" class="form-control" aria-label="Travel Date">
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <button type="button" onclick="handleSearch()" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;border:none;padding:12px 30px;border-radius:8px;">Search</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-bar" id="statsBar" data-aos="fade-up">
+        <div class="row text-center gy-3">
+          <div class="col">
+            <div class="stat-number"><span class="counter" data-target="5000" data-suffix="+">0</span> ✈</div>
+            <p class="stat-label">Happy Travelers</p>
+          </div>
+          <div class="col">
+            <div class="stat-number"><span class="counter" data-target="6">0</span> 🌍</div>
+            <p class="stat-label">Destinations</p>
+          </div>
+          <div class="col">
+            <div class="stat-number"><span class="counter" data-target="50" data-suffix="+">0</span> 👥</div>
+            <p class="stat-label">Trusted Agents</p>
+          </div>
+          <div class="col">
+            <div class="stat-number"><span class="counter" data-target="24" data-suffix="/7">0</span> 🕐</div>
+            <p class="stat-label">Support</p>
+          </div>
+          <div class="col">
+            <div class="stat-number"><span class="counter" data-target="100" data-suffix="%">0</span> ✅</div>
+            <p class="stat-label">Verified Tickets</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="destinations" class="destinations-section" data-aos="fade-up">
+    <div class="container">
+      <p class="section-label mb-2">Our Destinations</p>
+      <h2 class="fw-bold text-dark mb-0">Top Flights &amp;</h2>
+      <h2 class="fw-bold text-dark">Travel Packages</h2>
+      <p class="text-secondary mb-4">
+        Handpicked group flights and exclusive packages for every traveler — from business trips to spiritual journeys.
+      </p>
+
+      <div class="row g-4">
+        <div class="col-xl-4 col-md-6">
+          <article class="dest-card">
+            <div class="dest-image-wrap">
+              <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400" alt="UAE Flights">
+              <span class="badge-custom badge-red">Most Popular</span>
+            </div>
+            <div class="p-4">
+              <p class="location-pill mb-2">📍 United Arab Emirates</p>
+              <h5 class="text-dark fw-bold">UAE Flights</h5>
+              <p class="text-secondary">Unique flights to Dubai &amp; Sharjah from major Pakistani cities. Best rates, guaranteed seats.</p>
+              <p class="price mb-3">PKR 85,000 <small>/person</small></p>
+              <a href="auth/login.html" class="btn" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;width:100%;display:block;text-align:center;padding:10px;border-radius:8px;text-decoration:none;">Book Now</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <article class="dest-card">
+            <div class="dest-image-wrap">
+              <img src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?w=400" alt="KSA Group Flights">
+              <span class="badge-custom badge-green">Group Flights</span>
+            </div>
+            <div class="p-4">
+              <p class="location-pill mb-2">📍 Kingdom of Saudi Arabia</p>
+              <h5 class="text-dark fw-bold">KSA Oneway Groups</h5>
+              <p class="text-secondary">Affordable one-way group flights to Riyadh, Jeddah, and Dammam with meal options.</p>
+              <p class="price mb-3">PKR 75,000 <small>/person</small></p>
+              <a href="auth/login.html" class="btn" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;width:100%;display:block;text-align:center;padding:10px;border-radius:8px;text-decoration:none;">Book Now</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <article class="dest-card">
+            <div class="dest-image-wrap">
+              <img src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=400" alt="Umrah Package">
+              <span class="badge-custom badge-gold">Makkah &amp; Madinah</span>
+            </div>
+            <div class="p-4">
+              <p class="location-pill mb-2">📍 Makkah &amp; Madinah</p>
+              <h5 class="text-dark fw-bold">Umrah Package</h5>
+              <p class="text-secondary">All-inclusive Umrah packages with visa, hotel, transport &amp; guided ziyarat. Group &amp; private available.</p>
+              <p class="price mb-3">PKR 1,80,000 <small>/person</small></p>
+              <a href="auth/login.html" class="btn" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;width:100%;display:block;text-align:center;padding:10px;border-radius:8px;text-decoration:none;">Book Now</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <article class="dest-card">
+            <div class="dest-image-wrap">
+              <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400" alt="Oman Tours">
+            </div>
+            <div class="p-4">
+              <p class="location-pill mb-2">📍 Sultanate of Oman</p>
+              <h5 class="text-dark fw-bold">Oman Tours</h5>
+              <p class="text-secondary">Explore Muscat, Salalah, and the beautiful landscapes of Oman with our curated tour packages.</p>
+              <p class="price mb-3">PKR 95,000 <small>/person</small></p>
+              <a href="auth/login.html" class="btn" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;width:100%;display:block;text-align:center;padding:10px;border-radius:8px;text-decoration:none;">Book Now</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <article class="dest-card">
+            <div class="dest-image-wrap">
+              <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400" alt="UK and Europe Tours">
+            </div>
+            <div class="p-4">
+              <p class="location-pill mb-2">📍 United Kingdom &amp; Europe</p>
+              <h5 class="text-dark fw-bold">UK / Europe Tours</h5>
+              <p class="text-secondary">Premium travel packages to London, Paris, Amsterdam, and more — with visa assistance included.</p>
+              <p class="price mb-3">PKR 3,50,000 <small>/person</small></p>
+              <a href="auth/login.html" class="btn" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;width:100%;display:block;text-align:center;padding:10px;border-radius:8px;text-decoration:none;">Book Now</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-xl-4 col-md-6">
+          <article class="dest-card">
+            <div class="dest-image-wrap">
+              <img src="https://images.unsplash.com/photo-1564769625905-50e93615e769?w=400" alt="Umrah Tickets">
+              <span class="badge-custom badge-red">Tickets Only</span>
+            </div>
+            <div class="p-4">
+              <p class="location-pill mb-2">📍 Kingdom of Saudi Arabia</p>
+              <h5 class="text-dark fw-bold">Umrah Tickets</h5>
+              <p class="text-secondary">Standalone flight tickets for Umrah travelers. Flexible dates, multiple airlines, best prices.</p>
+              <p class="price mb-3">PKR 90,000 <small>/person</small></p>
+              <a href="auth/login.html" class="btn" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;width:100%;display:block;text-align:center;padding:10px;border-radius:8px;text-decoration:none;">Book Now</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="umrah" class="umrah-section" data-aos="fade-up">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <p class="section-label mb-2">Packages 2025</p>
+          <h2 class="fw-bold mb-0">Begin Your Spiritual</h2>
+          <h2 class="fw-bold gradient-gold-text">Journey With Us</h2>
+          <p class="text-light opacity-75 mt-3">
+            Our all-inclusive Umrah packages handle everything — so you can focus on what truly matters.
+          </p>
+
+          <div class="feature-item mt-4">
+            <span class="feature-icon">✈</span>
+            <div>
+              <h6>Return Flights Included</h6>
+              <p>Direct &amp; connecting flights from all major Pakistani cities</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🏨</span>
+            <div>
+              <h6>Hotel Accommodation</h6>
+              <p>3-star to 5-star hotels near Haram in Makkah &amp; Madinah</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">📋</span>
+            <div>
+              <h6>Visa Processing</h6>
+              <p>Complete Umrah visa assistance with 99% approval rate</p>
+            </div>
+          </div>
+          <div class="feature-item mb-0">
+            <span class="feature-icon">🚌</span>
+            <div>
+              <h6>Ground Transport</h6>
+              <p>Airport transfers and Haram transport included</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <aside class="package-card">
+            <p class="section-label mb-3">10 Days Package (Group)</p>
+            <ul class="check-list mb-3">
+              <li>Return Air Ticket (Economy)</li>
+              <li>Umrah Visa</li>
+              <li>4-Star Hotel (Makkah 7N + Madinah 3N)</li>
+              <li>Airport Transfers</li>
+              <li>Ziyarat Transport</li>
+              <li>Guided Group Leader</li>
+            </ul>
+            <hr style="border-color: rgba(255, 215, 0, 0.55);">
+            <p class="mb-3">
+              <span class="price" style="font-size: 2rem;">PKR 1,80,000</span>
+              <span class="text-secondary">/person</span>
+            </p>
+            <a href="auth/login.html" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;padding:14px 30px;border-radius:8px;display:block;text-align:center;text-decoration:none;font-size:16px;">Book Umrah Package →</a>
+            <p class="text-secondary small text-center mt-3 mb-0">🔒 Secure booking — No hidden charges</p>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="vendor" class="vendor-section" data-aos="fade-up">
+    <div class="container">
+      <div class="vendor-card">
+        <span class="plus-decoration">+</span>
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-8">
+            <p class="section-label mb-2">For Travel Agents</p>
+            <h2 class="fw-bold mb-0">Become an Air Arabian</h2>
+            <h2 class="fw-bold gradient-gold-text">Vendor Partner</h2>
+            <p class="text-light opacity-75 mt-3 mb-4">
+              Join our growing network of 50+ verified travel agents. Get access to exclusive fares, real-time ticket inventory, vendor dashboard, and dedicated support — all in one portal.
+            </p>
+            <div class="d-flex flex-wrap gap-2">
+              <a href="auth/register.html" class="btn" style="background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;border-radius:25px;padding:10px 25px;">✈ Apply as Vendor</a>
+              <a href="#contact" class="btn" style="border:2px solid #FFD700;color:#FFD700;border-radius:25px;padding:10px 25px;">📞 Contact Us First</a>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="agent-stat-box">
+                  <h3>50+</h3>
+                  <p class="mb-0 text-white">Active Agents</p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="agent-stat-box">
+                  <h3>Free</h3>
+                  <p class="mb-0 text-white">Registration</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-4">
+        <span class="text-white">Get In</span> <span class="gradient-gold-text">Touch</span>
+      </h2>
+
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="info-card">
+            <span class="info-icon">📍</span>
+            <div>
+              <h6 class="mb-1 text-white">Office</h6>
+              <p class="mb-0 text-secondary">Travel Network &amp; Tours, Karachi, Pakistan</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="info-card">
+            <span class="info-icon">📞</span>
+            <div>
+              <h6 class="mb-1 text-white">Phone</h6>
+              <p class="mb-0 text-secondary">+92 300 0000000</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="info-card">
+            <span class="info-icon">✉</span>
+            <div>
+              <h6 class="mb-1 text-white">Email</h6>
+              <p class="mb-0 text-secondary">info@airarabiantravels.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <form onsubmit="sendMessage(event)">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Name">
+            </div>
+            <div class="col-md-6">
+              <input type="email" class="form-control" placeholder="Email">
+            </div>
+            <div class="col-md-6">
+              <input type="tel" class="form-control" placeholder="Phone">
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Subject">
+            </div>
+            <div class="col-12">
+              <textarea class="form-control" rows="4" placeholder="Message"></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-gold px-4 py-2">Send Message</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer" data-aos="fade-up">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6">
+          <img src="assets/images/logo.png" height="45" style="object-fit:contain;">
+          <p class="text-secondary">
+            Pakistan's trusted travel network connecting passengers and agents to the world's top destinations.
+          </p>
+          <div class="mt-3">
+            <a href="#" class="social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="social-link" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" class="social-link" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6">
+          <h5 class="footer-title">Destinations</h5>
+          <ul class="footer-links">
+            <li><a href="#destinations">UAE Flights</a></li>
+            <li><a href="#destinations">KSA Flights</a></li>
+            <li><a href="#umrah">Umrah Packages</a></li>
+            <li><a href="#destinations">Oman Tours</a></li>
+            <li><a href="#destinations">UK / Europe</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-title">Quick Links</h5>
+          <ul class="footer-links">
+            <li><a href="auth/login.html">Book a Ticket</a></li>
+            <li><a href="auth/register.html">Become a Vendor</a></li>
+            <li><a href="auth/login.html">Agent Login</a></li>
+            <li><a href="auth/login.html">Track Booking</a></li>
+            <li><a href="#contact">Refund Policy</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <h5 class="footer-title">Contact Us</h5>
+          <ul class="footer-links">
+            <li>📍 Travel Network &amp; Tours, Pakistan</li>
+            <li>📞 +92 300 0000000</li>
+            <li>✉ info@airarabiantravels.com</li>
+            <li>🕐 Mon – Sat: 9AM – 9PM PKT</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row g-2 align-items-center">
+          <div class="col-md-6">
+            <p>© 2025 Air Arabian Travels. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <p>Built with ♥ for Pakistani Travelers</p>
+            <!-- Hidden Admin Access -->
+            <span id="adminAccess" 
+            style="opacity:0;cursor:default;
+            font-size:10px;color:transparent;
+            user-select:none;"
+            onclick="adminClickCount()"
+            title="">.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="auth/login.html" 
+  id="hiddenAdminLink"
+  style="position:fixed;
+  bottom:5px;right:5px;
+  width:20px;height:20px;
+  opacity:0;cursor:default;
+  z-index:9999;display:block;"
+  title=""></a>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    let clickCount = 0;
+    let clickTimer;
+
+    function adminClickCount(){
+      clickCount++;
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(function(){
+        clickCount = 0;
+      }, 2000);
+      
+      if(clickCount >= 5){
+        clickCount = 0;
+        window.location.href = 
+        'auth/login.html?admin=true';
+      }
+    }
+
+    document.addEventListener('keydown',
+    function(e){
+      // Ctrl + Shift + A = Admin login
+      if(e.ctrlKey && e.shiftKey && 
+      e.key === 'A'){
+        window.location.href = 
+        'auth/login.html?admin=true';
+      }
+    });
+
+    function handleSearch(){
+      window.location.href='auth/login.html';
+    }
+
+    function sendMessage(e){
+      e.preventDefault();
+
+      const name = document.querySelector('#contact input[type="text"]') ||
+      document.querySelector('.contact-form input[type="text"]') ||
+      document.querySelector('form input[placeholder*="Name"]') ||
+      document.querySelector('form input[placeholder*="name"]');
+
+      const email = document.querySelector('#contact input[type="email"]') ||
+      document.querySelector('form input[type="email"]');
+
+      const message = document.querySelector('#contact textarea') ||
+      document.querySelector('form textarea');
+
+      let valid = true;
+      let errors = [];
+
+      if(!name?.value || name.value.trim().length < 2){
+        errors.push('Please enter your name');
+        if(name) name.style.border='2px solid #C0392B';
+        valid = false;
+      } else {
+        if(name) name.style.border='';
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!email?.value || !emailRegex.test(email.value)){
+        errors.push('Please enter valid email');
+        if(email) email.style.border='2px solid #C0392B';
+        valid = false;
+      } else {
+        if(email) email.style.border='';
+      }
+
+      if(!message?.value || message.value.trim().length < 10){
+        errors.push('Message must be at least 10 characters');
+        if(message) message.style.border='2px solid #C0392B';
+        valid = false;
+      } else {
+        if(message) message.style.border='';
+      }
+
+      if(!valid){
+        alert('Please fix:\n\n'+errors.join('\n'));
+        return false;
+      }
+
+      alert('✅ Message sent successfully!\n\n'+
+      'Thank you '+name.value+'!\n'+
+      'We will reply within 2 hours.');
+
+      document.querySelector('form').reset();
+      return false;
+    }
+
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    const navbar = document.querySelector(".site-navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 12) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    });
+
+    const modeLabels = document.querySelectorAll(".trip-mode");
+    modeLabels.forEach((label) => {
+      label.addEventListener("click", () => {
+        modeLabels.forEach((item) => item.classList.remove("active"));
+        label.classList.add("active");
+      });
+    });
+
+    const counters = document.querySelectorAll(".counter");
+    let countersStarted = false;
+    const statsSection = document.getElementById("statsBar");
+
+    function runCounters() {
+      counters.forEach((counter) => {
+        const target = Number(counter.getAttribute("data-target"));
+        const suffix = counter.getAttribute("data-suffix") || "";
+        let current = 0;
+        const duration = 1200;
+        const stepTime = 20;
+        const increment = Math.max(1, Math.ceil(target / (duration / stepTime)));
+
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          counter.textContent = current + suffix;
+        }, stepTime);
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !countersStarted) {
+          countersStarted = true;
+          runCounters();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    if (statsSection) {
+      observer.observe(statsSection);
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+

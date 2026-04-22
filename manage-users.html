@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Manage Users | Admin</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+:root{--gold:#FFD700;--red:#C0392B;--dark:#0a0a0a;--dark2:#1a1a1a;}
+body{background:#f5f5f5;}
+.sidebar{width:240px;background:var(--dark);height:100vh;position:fixed;left:0;top:0;z-index:100;overflow-y:auto;}
+.sidebar-logo{padding:20px 15px;border-bottom:1px solid rgba(255,215,0,0.2);}
+.sidebar-logo img{height:65px;object-fit:contain;max-width:180px;}
+.sidebar-nav{padding:15px 0;}
+.sidebar-link{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;padding:12px 20px;transition:all 0.2s;font-size:14px;}
+.sidebar-link:hover,.sidebar-link.active{color:var(--gold);background:rgba(255,215,0,0.1);border-left:3px solid var(--gold);}
+.sidebar-link i{font-size:16px;color:var(--gold);}
+.content{margin-left:240px;min-height:100vh;}
+.topbar{background:#fff;padding:15px 25px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,0.08);}
+.topbar-title{font-size:1.3rem;font-weight:700;}
+.clock-pill{background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;padding:6px 16px;border-radius:25px;font-weight:700;font-size:13px;}
+.main{padding:25px;}
+.card-panel{background:#fff;border-radius:12px;box-shadow:0 2px 15px rgba(0,0,0,0.06);overflow:hidden;margin-bottom:25px;}
+.card-header-dark{background:#1a1a1a;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;}
+.card-header-dark h5{color:#FFD700;margin:0;font-weight:600;}
+.table th{background:#8B0000;color:#FFD700;font-size:13px;padding:12px 15px;border:none;}
+.table td{padding:12px 15px;font-size:13px;vertical-align:middle;border-bottom:1px solid #f0f0f0;}
+.badge-gold{background:#FFD700;color:#000;padding:4px 12px;border-radius:25px;font-size:12px;font-weight:600;}
+.badge-red{background:#C0392B;color:#fff;padding:4px 12px;border-radius:25px;font-size:12px;}
+.badge-blue{background:#1976D2;color:#fff;padding:4px 12px;border-radius:25px;font-size:12px;}
+.badge-gray{background:#888;color:#fff;padding:4px 12px;border-radius:25px;font-size:12px;}
+.btn-gold{background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:700;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;}
+.btn-red{background:#C0392B;color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;}
+.btn-outline{background:transparent;color:#FFD700;border:1px solid #FFD700;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;}
+.btn-blue{background:#1976D2;color:#fff;border:none;padding:6px 16px;border-radius:6px;cursor:pointer;font-size:13px;}
+.form-label{color:#555;font-size:13px;font-weight:600;}
+.modal-header-dark{background:#1a1a1a;border-bottom:1px solid #FFD700;}
+.modal-header-dark .modal-title{color:#FFD700;}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="../assets/images/logo.png"
+    alt="Air Arabian Travels"
+    onerror="this.style.display='none'">
+  </div>
+  <nav class="sidebar-nav">
+    <a href="dashboard.html" 
+    class="sidebar-link">
+    <i class="bi bi-speedometer2"></i>
+    Dashboard</a>
+    <a href="vendors.html" 
+    class="sidebar-link">
+    <i class="bi bi-people"></i>
+    Manage Vendors</a>
+    <a href="manage-users.html" 
+    class="sidebar-link active">
+    <i class="bi bi-person-gear"></i>
+    Manage Users</a>
+    <a href="tickets.html" 
+    class="sidebar-link">
+    <i class="bi bi-ticket-perforated"></i>
+    Manage Tickets</a>
+    <a href="bookings.html" 
+    class="sidebar-link">
+    <i class="bi bi-journal-text"></i>
+    Manage Bookings</a>
+    <a href="payments.html" 
+    class="sidebar-link">
+    <i class="bi bi-credit-card"></i>
+    Verify Payments</a>
+    <a href="reports.html" 
+    class="sidebar-link">
+    <i class="bi bi-bar-chart"></i>
+    Reports</a>
+    <a href="settings.html" 
+    class="sidebar-link">
+    <i class="bi bi-gear"></i>
+    Settings</a>
+    <a href="../auth/login.html" 
+    class="sidebar-link">
+    <i class="bi bi-box-arrow-right"></i>
+    Logout</a>
+  </nav>
+</aside>
+
+<div class="content">
+  <div class="topbar">
+    <h1 class="topbar-title">Manage Users</h1>
+    <div class="d-flex align-items-center gap-3">
+      <span class="clock-pill" 
+      id="liveClock"></span>
+      <span style="font-weight:600;">
+      ADMIN</span>
+    </div>
+  </div>
+  
+  <div class="main">
+  
+    <!-- Stats -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-3">
+        <div style="background:#fff;
+        border-radius:12px;padding:20px;
+        box-shadow:0 2px 15px rgba(0,0,0,0.06);
+        border-left:4px solid #FFD700;">
+          <div style="font-size:28px;
+          font-weight:700;color:#FFD700;"
+          id="totalUsers">8</div>
+          <div style="color:#888;font-size:13px;">
+          Total Users</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div style="background:#fff;
+        border-radius:12px;padding:20px;
+        box-shadow:0 2px 15px rgba(0,0,0,0.06);
+        border-left:4px solid #1976D2;">
+          <div style="font-size:28px;
+          font-weight:700;color:#1976D2;"
+          id="totalAdmins">1</div>
+          <div style="color:#888;font-size:13px;">
+          Admins</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div style="background:#fff;
+        border-radius:12px;padding:20px;
+        box-shadow:0 2px 15px rgba(0,0,0,0.06);
+        border-left:4px solid #28a745;">
+          <div style="font-size:28px;
+          font-weight:700;color:#28a745;"
+          id="totalVendors">5</div>
+          <div style="color:#888;font-size:13px;">
+          Active Vendors</div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div style="background:#fff;
+        border-radius:12px;padding:20px;
+        box-shadow:0 2px 15px rgba(0,0,0,0.06);
+        border-left:4px solid #888;">
+          <div style="font-size:28px;
+          font-weight:700;color:#888;"
+          id="totalInactive">2</div>
+          <div style="color:#888;font-size:13px;">
+          Inactive Users</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Users Table -->
+    <div class="card-panel">
+      <div class="card-header-dark">
+        <h5>All Users</h5>
+        <div class="d-flex gap-2">
+          <input type="text"
+          placeholder="Search users..."
+          oninput="searchUsers(this)"
+          style="padding:6px 12px;
+          border:1px solid #FFD700;
+          border-radius:6px;background:#0a0a0a;
+          color:#fff;font-size:13px;width:200px;">
+          <button class="btn-gold"
+          onclick="openAddUserModal()">
+          + Add New User</button>
+        </div>
+      </div>
+      
+      <div style="padding:15px;
+      background:#1a1a1a;
+      border-bottom:1px solid #333;">
+        <div class="d-flex gap-2 flex-wrap">
+          <button onclick="filterUsers('all')"
+          class="filter-btn active"
+          style="background:linear-gradient(135deg,
+          #FFD700,#FFA500);color:#000;
+          border:none;padding:5px 15px;
+          border-radius:25px;font-size:13px;
+          font-weight:600;cursor:pointer;">
+          All</button>
+          <button onclick="filterUsers('admin')"
+          class="filter-btn"
+          style="background:transparent;
+          color:#fff;border:1px solid #555;
+          padding:5px 15px;border-radius:25px;
+          font-size:13px;cursor:pointer;">
+          Admins</button>
+          <button onclick="filterUsers('vendor')"
+          class="filter-btn"
+          style="background:transparent;
+          color:#fff;border:1px solid #555;
+          padding:5px 15px;border-radius:25px;
+          font-size:13px;cursor:pointer;">
+          Vendors</button>
+          <button onclick="filterUsers('active')"
+          class="filter-btn"
+          style="background:transparent;
+          color:#fff;border:1px solid #555;
+          padding:5px 15px;border-radius:25px;
+          font-size:13px;cursor:pointer;">
+          Active</button>
+          <button onclick="filterUsers('inactive')"
+          class="filter-btn"
+          style="background:transparent;
+          color:#fff;border:1px solid #555;
+          padding:5px 15px;border-radius:25px;
+          font-size:13px;cursor:pointer;">
+          Inactive</button>
+        </div>
+      </div>
+      
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>SR</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="usersTable">
+          <tr>
+            <td>1</td>
+            <td>Admin</td>
+            <td>admin@airarabian.com</td>
+            <td>03000000000</td>
+            <td><span class="badge-blue">Admin</span></td>
+            <td><span class="badge-gold">Active</span></td>
+            <td>20-Apr-2026</td>
+            <td>
+              <button class="btn-outline"
+              onclick="editUser(this)"
+              style="font-size:11px;
+              padding:3px 10px;">
+              Edit</button>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Air Arabian Travel</td>
+            <td>vendor@airarabian.com</td>
+            <td>03001234567</td>
+            <td><span class="badge-gold">Vendor</span></td>
+            <td><span class="badge-gold">Active</span></td>
+            <td>19-Apr-2026</td>
+            <td>
+              <button class="btn-outline"
+              onclick="editUser(this)"
+              style="font-size:11px;
+              padding:3px 10px;">
+              Edit</button>
+              <button class="btn-red ms-1"
+              onclick="deactivateUser(this)"
+              style="font-size:11px;
+              padding:3px 10px;">
+              Deactivate</button>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Sky Tours</td>
+            <td>sky@gmail.com</td>
+            <td>03111234567</td>
+            <td><span class="badge-gold">Vendor</span></td>
+            <td><span class="badge-gold">Active</span></td>
+            <td>18-Apr-2026</td>
+            <td>
+              <button class="btn-outline"
+              onclick="editUser(this)"
+              style="font-size:11px;
+              padding:3px 10px;">
+              Edit</button>
+              <button class="btn-red ms-1"
+              onclick="deactivateUser(this)"
+              style="font-size:11px;
+              padding:3px 10px;">
+              Deactivate</button>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Rehman Travels</td>
+            <td>rehman@gmail.com</td>
+            <td>03211234567</td>
+            <td><span class="badge-gold">Vendor</span></td>
+            <td><span class="badge-gray">Inactive</span></td>
+            <td>17-Apr-2026</td>
+            <td>
+              <button class="btn-outline"
+              onclick="editUser(this)"
+              style="font-size:11px;
+              padding:3px 10px;">
+              Edit</button>
+              <button 
+              onclick="activateUser(this)"
+              style="background:#28a745;
+              color:#fff;border:none;
+              padding:3px 10px;
+              border-radius:6px;
+              font-size:11px;cursor:pointer;"
+              class="ms-1">
+              Activate</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Add User Modal -->
+<div class="modal fade" id="addUserModal"
+tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header 
+      modal-header-dark">
+        <h5 class="modal-title">
+        Add New User</h5>
+        <button type="button"
+        class="btn-close btn-close-white"
+        data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label">
+            Full Name*</label>
+            <input type="text" 
+            class="form-control"
+            id="newUserName"
+            placeholder="Enter full name"
+            required>
+          </div>
+          <div class="col-12">
+            <label class="form-label">
+            Email*</label>
+            <input type="email"
+            class="form-control"
+            id="newUserEmail"
+            placeholder="email@example.com"
+            required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">
+            Phone*</label>
+            <input type="text"
+            class="form-control"
+            id="newUserPhone"
+            placeholder="03xxxxxxxxx">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">
+            Role*</label>
+            <select class="form-select"
+            id="newUserRole">
+              <option value="vendor">
+              Vendor</option>
+              <option value="admin">
+              Admin</option>
+              <option value="user">
+              User</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label">
+            Password*</label>
+            <input type="password"
+            class="form-control"
+            id="newUserPassword"
+            placeholder="Min 8 characters">
+          </div>
+          <div class="col-12">
+            <label class="form-label">
+            City</label>
+            <input type="text"
+            class="form-control"
+            id="newUserCity"
+            placeholder="City name">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"
+      style="border-top:1px solid #FFD700;">
+        <button type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal">Cancel</button>
+        <button type="button"
+        onclick="saveNewUser()"
+        class="btn-gold"
+        style="padding:8px 25px;">
+        Add User</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Edit User Modal -->
+<div class="modal fade" id="editUserModal"
+tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header
+      modal-header-dark">
+        <h5 class="modal-title">
+        Edit User</h5>
+        <button type="button"
+        class="btn-close btn-close-white"
+        data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label">
+            Full Name*</label>
+            <input type="text"
+            class="form-control"
+            id="editUserName">
+          </div>
+          <div class="col-12">
+            <label class="form-label">
+            Email*</label>
+            <input type="email"
+            class="form-control"
+            id="editUserEmail">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">
+            Phone</label>
+            <input type="text"
+            class="form-control"
+            id="editUserPhone">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">
+            Role</label>
+            <select class="form-select"
+            id="editUserRole">
+              <option value="vendor">
+              Vendor</option>
+              <option value="admin">
+              Admin</option>
+              <option value="user">
+              User</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label">
+            New Password 
+            (leave blank to keep same)</label>
+            <input type="password"
+            class="form-control"
+            id="editUserPassword"
+            placeholder="New password">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"
+      style="border-top:1px solid #FFD700;">
+        <button type="button"
+        class="btn btn-secondary"
+        data-bs-dismiss="modal">Cancel</button>
+        <button type="button"
+        onclick="updateUser()"
+        class="btn-gold"
+        style="padding:8px 25px;">
+        Update User</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Live Clock
+function updateClock(){
+  const now = new Date();
+  const days=['Sunday','Monday','Tuesday',
+  'Wednesday','Thursday','Friday','Saturday'];
+  const months=['Jan','Feb','Mar','Apr','May',
+  'Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  const s=String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('liveClock')
+  .textContent=days[now.getDay()]+' '+
+  h+':'+m+':'+s+' | '+
+  months[now.getMonth()]+' '+
+  now.getDate()+'/'+now.getFullYear();
+}
+setInterval(updateClock,1000);
+updateClock();
+
+// Search
+function searchUsers(input){
+  const val = input.value.toLowerCase();
+  document.querySelectorAll(
+  '#usersTable tr').forEach(row => {
+    row.style.display = 
+    row.textContent.toLowerCase()
+    .includes(val) ? '' : 'none';
+  });
+}
+
+// Filter
+function filterUsers(type){
+  document.querySelectorAll('.filter-btn')
+  .forEach(b => {
+    b.style.background='transparent';
+    b.style.color='#fff';
+    b.style.border='1px solid #555';
+  });
+  event.target.style.background=
+  'linear-gradient(135deg,#FFD700,#FFA500)';
+  event.target.style.color='#000';
+  event.target.style.border='none';
+  
+  const rows = document.querySelectorAll(
+  '#usersTable tr');
+  rows.forEach(row => {
+    if(type === 'all'){
+      row.style.display = '';
+    } else if(type === 'active'){
+      const status = row.querySelector(
+      '.badge-gold');
+      row.style.display = 
+      status ? '' : 'none';
+    } else if(type === 'inactive'){
+      const status = row.querySelector(
+      '.badge-gray');
+      row.style.display = 
+      status ? '' : 'none';
+    } else {
+      const role = row.querySelector(
+      'td:nth-child(5)');
+      row.style.display = 
+      role?.textContent.toLowerCase()
+      .includes(type) ? '' : 'none';
+    }
+  });
+}
+
+// Add User Modal
+function openAddUserModal(){
+  const modal = new bootstrap.Modal(
+  document.getElementById('addUserModal'));
+  modal.show();
+}
+
+function saveNewUser(){
+  const name = document.getElementById(
+  'newUserName').value;
+  const email = document.getElementById(
+  'newUserEmail').value;
+  const phone = document.getElementById(
+  'newUserPhone').value;
+  const role = document.getElementById(
+  'newUserRole').value;
+  const password = document.getElementById(
+  'newUserPassword').value;
+  
+  if(!name||!email||!password){
+    alert('Please fill required fields!');
+    return;
+  }
+  
+  const tbody = document.getElementById(
+  'usersTable');
+  const count = tbody.querySelectorAll('tr')
+  .length + 1;
+  const roleBadge = role === 'admin' ? 
+  'badge-blue' : 'badge-gold';
+  
+  const row = document.createElement('tr');
+  row.innerHTML = 
+  '<td>'+count+'</td>'+
+  '<td>'+name+'</td>'+
+  '<td>'+email+'</td>'+
+  '<td>'+(phone||'-')+'</td>'+
+  '<td><span class=\"'+roleBadge+'\">'+
+  role.charAt(0).toUpperCase()+
+  role.slice(1)+'</span></td>'+
+  '<td><span class=\"badge-gold\">Active</span></td>'+
+  '<td>'+new Date().toLocaleDateString('en-GB',
+  {day:'2-digit',month:'short',year:'numeric'})
+  +'</td>'+
+  '<td>'+
+  '<button class=\"btn-outline\" '+
+  'onclick=\"editUser(this)\" '+
+  'style=\"font-size:11px;padding:3px 10px;\">'+
+  'Edit</button> '+
+  '<button class=\"btn-red ms-1\" '+
+  'onclick=\"deactivateUser(this)\" '+
+  'style=\"font-size:11px;padding:3px 10px;\">'+
+  'Deactivate</button>'+
+  '</td>';
+  tbody.appendChild(row);
+  
+  // Update stats
+  document.getElementById('totalUsers')
+  .textContent = count;
+  
+  bootstrap.Modal.getInstance(
+  document.getElementById('addUserModal'))
+  .hide();
+  
+  alert('User added successfully!\n'+
+  'Name: '+name+'\n'+
+  'Email: '+email+'\n'+
+  'Role: '+role);
+  
+  // Clear form
+  document.getElementById('newUserName')
+  .value='';
+  document.getElementById('newUserEmail')
+  .value='';
+  document.getElementById('newUserPhone')
+  .value='';
+  document.getElementById('newUserPassword')
+  .value='';
+}
+
+// Edit User
+let editingRow = null;
+function editUser(btn){
+  editingRow = btn.closest('tr');
+  const cells = editingRow.cells;
+  
+  document.getElementById('editUserName')
+  .value = cells[1].textContent;
+  document.getElementById('editUserEmail')
+  .value = cells[2].textContent;
+  document.getElementById('editUserPhone')
+  .value = cells[3].textContent;
+  
+  const roleText = cells[4].textContent
+  .trim().toLowerCase();
+  document.getElementById('editUserRole')
+  .value = roleText;
+  
+  const modal = new bootstrap.Modal(
+  document.getElementById('editUserModal'));
+  modal.show();
+}
+
+function updateUser(){
+  if(!editingRow) return;
+  const name = document.getElementById(
+  'editUserName').value;
+  const email = document.getElementById(
+  'editUserEmail').value;
+  const phone = document.getElementById(
+  'editUserPhone').value;
+  const role = document.getElementById(
+  'editUserRole').value;
+  
+  if(!name||!email){
+    alert('Name and email required!');
+    return;
+  }
+  
+  editingRow.cells[1].textContent = name;
+  editingRow.cells[2].textContent = email;
+  editingRow.cells[3].textContent = phone||'-';
+  
+  const roleBadge = role === 'admin' ? 
+  'badge-blue' : 'badge-gold';
+  editingRow.cells[4].innerHTML = 
+  '<span class=\"'+roleBadge+'\">'+
+  role.charAt(0).toUpperCase()+
+  role.slice(1)+'</span>';
+  
+  bootstrap.Modal.getInstance(
+  document.getElementById('editUserModal'))
+  .hide();
+  
+  alert('User updated successfully!');
+}
+
+// Deactivate/Activate
+function deactivateUser(btn){
+  if(confirm('Deactivate this user?')){
+    const row = btn.closest('tr');
+    const name = row.cells[1].textContent;
+    row.cells[5].innerHTML = 
+    '<span class=\"badge-gray\">Inactive</span>';
+    btn.textContent = 'Activate';
+    btn.style.background = '#28a745';
+    btn.onclick = function(){
+      activateUser(this);
+    };
+    alert('User '+name+' deactivated!');
+  }
+}
+
+function activateUser(btn){
+  if(confirm('Activate this user?')){
+    const row = btn.closest('tr');
+    const name = row.cells[1].textContent;
+    row.cells[5].innerHTML = 
+    '<span class=\"badge-gold\">Active</span>';
+    btn.textContent = 'Deactivate';
+    btn.style.background = '#C0392B';
+    btn.onclick = function(){
+      deactivateUser(this);
+    };
+    alert('User '+name+' activated!');
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Tickets Booking | Air Arabian Travels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root { --dark-red:#8B0000; --gold:#FFD700; --soft:#f5f5f5; --red:#C0392B; }
+    body { margin:0; font-family:Poppins,sans-serif; background:var(--soft); }
+    .sidebar { width:240px; position:fixed; left:0; top:0; bottom:0; background:#1a1a1a; padding:16px 0; overflow-y:auto; z-index:1040; transition:transform .3s; }
+    .sidebar-logo { padding:0 18px 14px; border-bottom:1px solid rgba(255,255,255,.08); margin-bottom:12px; }
+    .sidebar-logo img { height:40px; }
+    .sidebar-link { display:flex; align-items:center; gap:10px; color:#fff; text-decoration:none; padding:11px 16px; border-left:3px solid transparent; font-size:.92rem; }
+    .sidebar-link i { color:var(--gold); }
+    .sidebar-link:hover { color:var(--gold); }
+    .sidebar-link.active { border-left-color:var(--gold); color:var(--gold); background:rgba(255,215,0,.08); }
+    .content { margin-left:240px; }
+    .topbar { background:#fff; box-shadow:0 4px 14px rgba(0,0,0,.08); padding:14px 24px; position:sticky; top:0; z-index:1020; }
+    .clock-pill { background:linear-gradient(135deg,#FFD700,#FFA500); padding:8px 14px; border-radius:999px; font-weight:600; font-size:.84rem; }
+    .agent-menu { display:flex; gap:10px; align-items:center; }
+    .agent-avatar { width:38px; height:38px; border-radius:50%; background:linear-gradient(135deg,#8B0000,#C0392B); color:#fff; display:inline-flex; align-items:center; justify-content:center; font-weight:700; }
+    .main { padding:22px; }
+    .cardx { background:#fff; border-radius:14px; box-shadow:0 4px 18px rgba(0,0,0,.08); padding:16px; }
+    .recent-table thead th { background:var(--dark-red); color:var(--gold); white-space:nowrap; font-size:.78rem; }
+    .badge-sold { background:#FFD700; color:#000; }
+    .badge-cancelled { background:#C0392B; color:#fff; }
+    .badge-hold { background:#FFA500; color:#000; }
+    .status { border-radius:999px; padding:5px 10px; font-size:.75rem; font-weight:600; }
+    .action-btn { width:30px; height:30px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; border:1px solid #ddd; background:#fff; margin-right:4px; }
+    .filter-btn.active { background:#FFD700!important; border-color:#FFD700!important; color:#000!important; }
+    .auto-cancelled-row { text-decoration: line-through; opacity:.6; }
+    .expiry-warning { background:#FFD700; color:#000; border:none; }
+    .sidebar-toggle { display:none; border:none; background:transparent; font-size:1.35rem; margin-right:10px; }
+    .sidebar-backdrop { display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:1035; }
+    @media(max-width:991.98px){ .sidebar{transform:translateX(-100%)} .sidebar.open{transform:translateX(0)} .content{margin-left:0} .sidebar-toggle{display:inline-flex} .sidebar-backdrop.show{display:block} }
+  </style>
+</head>
+<body>
+  <aside class="sidebar" id="vendorSidebar">
+    <div class="sidebar-logo"><img src="../assets/images/logo.png" height="45" style="object-fit:contain;"></div>
+    <a class="sidebar-link" href="dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a>
+    <a class="sidebar-link" href="new-booking.html"><i class="bi bi-plus-circle"></i>New Booking</a>
+    <a class="sidebar-link active" href="tickets.html"><i class="bi bi-ticket-perforated"></i>My Tickets Booking</a>
+    <a class="sidebar-link" href="umrah-booking.html"><i class="bi bi-moon-stars"></i>My Umrah Booking</a>
+    <a class="sidebar-link" href="bank-accounts.html"><i class="bi bi-bank"></i>Bank Accounts</a>
+    <a class="sidebar-link" href="ledger.html"><i class="bi bi-journal-text"></i>Accounts Ledger</a>
+    <a class="sidebar-link" href="feedback.html"><i class="bi bi-chat-dots"></i>Feedback</a>
+    <a class="sidebar-link" href="settings.html"><i class="bi bi-gear"></i>Settings</a>
+    <a class="sidebar-link" href="contact-us.html"><i class="bi bi-envelope"></i>Contact Us</a>
+    <a class="sidebar-link" href="../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+  <div class="content">
+    <header class="topbar">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="d-flex align-items-center">
+          <button class="sidebar-toggle" id="sidebarToggle"><i class="bi bi-list"></i></button>
+          <h1 class="h4 fw-bold m-0">My Tickets Booking</h1>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <span class="clock-pill" id="liveClock">Monday 15:26 | April 20/2026</span>
+          <div class="agent-menu">
+            <span class="agent-avatar">AA</span>
+            <div><div style="font-size:.82rem;font-weight:600">AIR ARABIAN TRAVEL</div><div style="font-size:.75rem;color:#6c757d">Agent</div></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div id="expiryWarningMount"></div>
+      <div class="cardx mb-3">
+        <div class="row g-2 align-items-center">
+          <div class="col-lg-4"><input class="form-control" placeholder="KEYWORD..."></div>
+          <div class="col-lg-3"><input class="form-control" type="date"></div>
+          <div class="col-lg-5">
+            <div class="d-flex flex-wrap gap-2 justify-content-lg-end">
+              <button class="btn btn-outline-dark btn-sm filter-btn active" data-filter="all">All</button>
+              <button class="btn btn-outline-dark btn-sm filter-btn" data-filter="hold">Hold</button>
+              <button class="btn btn-outline-dark btn-sm filter-btn" data-filter="partial sold">Partial Sold</button>
+              <button class="btn btn-outline-dark btn-sm filter-btn" data-filter="sold">Confirmed</button>
+              <button class="btn btn-outline-dark btn-sm filter-btn" data-filter="cancelled">Cancelled</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cardx">
+        <div class="table-responsive">
+          <table class="table recent-table align-middle" id="ticketsTable">
+            <thead>
+              <tr><th>SR</th><th>INVOICE</th><th>PNR</th><th>GROUP</th><th>DPT/ARV</th><th>ADL</th><th>CHD</th><th>INF</th><th>RESERVED TIME</th><th>CONTACT</th><th>STATUS</th><th>ACTIONS</th></tr>
+            </thead>
+            <tbody>
+              <tr data-status="sold"><td>1</td><td>132805</td><td>63KALZ</td><td>AIR ARABIA LYP-SHJ FAISALABAD-SHARJAH</td><td>15-APR-2026</td><td>2</td><td>0</td><td>0</td><td>08-04-2026 18:59</td><td>HABIB 03262670610</td><td><span class="status badge-sold">Sold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="cancelled"><td>2</td><td>131284</td><td>69LUXU</td><td>AIR ARABIA LYP-SHJ FAISALABAD-SHARJAH</td><td>08-APR-2026</td><td>1</td><td>0</td><td>0</td><td>01-04-2026 22:41</td><td>HABIB 03262670610</td><td><span class="status badge-cancelled">Cancelled</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="sold"><td>3</td><td>127853</td><td>8T32TM</td><td>SAUDI AIRLINE UMRAH ISB ISLAMABAD-JEDDAH</td><td>22-FEB-2026</td><td>6</td><td>1</td><td>0</td><td>17-02-2026 17:42</td><td>ZAIN 03360712167</td><td><span class="status badge-sold">Sold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="sold"><td>4</td><td>126971</td><td>7KWRSY</td><td>SAUDI AIRLINE UMRAH LHE LAHORE-JEDDAH</td><td>12-MAR-2026</td><td>5</td><td>0</td><td>0</td><td>12-02-2026 17:56</td><td>ZAIN 03360712167</td><td><span class="status badge-sold">Sold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="cancelled"><td>5</td><td>126765</td><td>7KN8GI</td><td>SAUDI AIRLINE LHE LAHORE-JEDDAH</td><td>13-MAR-2026</td><td>5</td><td>0</td><td>0</td><td>11-02-2026 17:00</td><td>TAHA 03037339912</td><td><span class="status badge-cancelled">Cancelled</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="hold" data-invoice="126240"><td>6</td><td>126240</td><td>5PAQZZ</td><td>AIR ARABIA KHI-SHJ KARACHI-SHARJAH</td><td>11-MAR-2026</td><td>3</td><td>0</td><td>0</td><td>10-02-2026 15:24</td><td>OMER 03334445566</td><td><span class="status badge-hold hold-status">Hold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="partial sold"><td>7</td><td>125991</td><td>5GPKRT</td><td>FLYDUBAI ISB-DXB ISLAMABAD-DUBAI</td><td>10-MAR-2026</td><td>4</td><td>1</td><td>0</td><td>08-02-2026 18:14</td><td>ALI 03001112233</td><td><span class="status badge-hold">Hold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="sold"><td>8</td><td>125772</td><td>4ZZLEP</td><td>QATAR AIRWAYS LHE-DOH LAHORE-DOHA</td><td>08-MAR-2026</td><td>2</td><td>0</td><td>1</td><td>06-02-2026 11:33</td><td>HABIB 03262670610</td><td><span class="status badge-sold">Sold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="cancelled"><td>9</td><td>125447</td><td>4NHGKA</td><td>ETIHAD KHI-AUH KARACHI-ABU DHABI</td><td>06-MAR-2026</td><td>1</td><td>0</td><td>0</td><td>05-02-2026 09:45</td><td>TAHA 03037339912</td><td><span class="status badge-cancelled">Cancelled</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="sold"><td>10</td><td>125120</td><td>3LQRRW</td><td>PIA KHI-JED KARACHI-JEDDAH</td><td>05-MAR-2026</td><td>7</td><td>2</td><td>0</td><td>03-02-2026 13:56</td><td>ZAIN 03360712167</td><td><span class="status badge-sold">Sold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="hold" data-invoice="124782"><td>11</td><td>124782</td><td>3FKLPT</td><td>OMAN AIR ISB-MCT ISLAMABAD-MUSCAT</td><td>03-MAR-2026</td><td>2</td><td>1</td><td>0</td><td>01-02-2026 17:23</td><td>OMER 03334445566</td><td><span class="status badge-hold hold-status">Hold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="sold"><td>12</td><td>124300</td><td>2PKYHN</td><td>BRITISH AIRWAYS LHE-LHR LAHORE-LONDON</td><td>01-MAR-2026</td><td>3</td><td>0</td><td>0</td><td>28-01-2026 16:30</td><td>ALI 03001112233</td><td><span class="status badge-sold">Sold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="cancelled"><td>13</td><td>123995</td><td>2WPLMX</td><td>TURKISH AIR ISB-IST ISLAMABAD-ISTANBUL</td><td>28-FEB-2026</td><td>1</td><td>0</td><td>0</td><td>26-01-2026 10:12</td><td>TAHA 03037339912</td><td><span class="status badge-cancelled">Cancelled</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="partial sold"><td>14</td><td>123740</td><td>2QLTNN</td><td>EMIRATES KHI-DXB KARACHI-DUBAI</td><td>26-FEB-2026</td><td>5</td><td>0</td><td>0</td><td>25-01-2026 14:08</td><td>HABIB 03262670610</td><td><span class="status badge-hold">Hold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+              <tr data-status="sold"><td>15</td><td>123420</td><td>1BVVZR</td><td>SAUDIA LYP-JED FAISALABAD-JEDDAH</td><td>24-FEB-2026</td><td>4</td><td>1</td><td>0</td><td>23-01-2026 19:50</td><td>ZAIN 03360712167</td><td><span class="status badge-sold">Sold</span></td><td><span class="action-btn">??</span><span class="action-btn">??</span><span class="action-btn">??</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex justify-content-between align-items-center flex-wrap mt-3">
+          <small class="text-secondary">Showing 1 to 15 of 72 rows</small>
+          <nav><ul class="pagination pagination-sm mb-0"><li class="page-item active"><a class="page-link bg-warning border-warning text-dark" href="#">1</a></li><li class="page-item"><a class="page-link text-dark" href="#">2</a></li><li class="page-item disabled"><a class="page-link text-dark" href="#">...</a></li><li class="page-item"><a class="page-link text-dark" href="#">5</a></li></ul></nav>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="position-fixed top-0 end-0 p-3" style="z-index: 1080">
+    <div id="cancelToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body" id="cancelToastBody"></div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const d = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const m = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const live = document.getElementById("liveClock");
+    const p = (n) => String(n).padStart(2, "0");
+    function updateClock() {
+      const n = new Date();
+      live.textContent = d[n.getDay()] + " " + p(n.getHours()) + ":" + p(n.getMinutes()) + ":" + p(n.getSeconds()) + " | " + m[n.getMonth()] + " " + n.getDate() + "/" + n.getFullYear();
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    const s = document.getElementById("vendorSidebar");
+    const t = document.getElementById("sidebarToggle");
+    const b = document.getElementById("sidebarBackdrop");
+    const close = () => { s.classList.remove("open"); b.classList.remove("show"); };
+    t.addEventListener("click", () => { s.classList.toggle("open"); b.classList.toggle("show"); });
+    b.addEventListener("click", close);
+    window.addEventListener("resize", () => { if (window.innerWidth > 991) close(); });
+
+    document.querySelectorAll(".filter-btn").forEach((btn) => btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach((x) => x.classList.remove("active"));
+      btn.classList.add("active");
+      const f = btn.dataset.filter;
+      document.querySelectorAll("#ticketsTable tbody tr").forEach((r) => {
+        r.style.display = (f === "all" || r.dataset.status === f) ? "" : "none";
+      });
+    }));
+
+    const HOLD_MS = 4 * 60 * 60 * 1000;
+    const storageKey = "aat_tickets_reserved_times";
+    const warningMount = document.getElementById("expiryWarningMount");
+    const toastEl = document.getElementById("cancelToast");
+    const toastBody = document.getElementById("cancelToastBody");
+    const toast = new bootstrap.Toast(toastEl, { delay: 5000 });
+    const holdRows = Array.from(document.querySelectorAll('#ticketsTable tbody tr[data-status="hold"]'));
+    const stored = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    const defaultOffsets = { "126240": 3 * 60 * 60 * 1000 + 50 * 60 * 1000, "124782": 2 * 60 * 60 * 1000 };
+
+    function formatDuration(ms) {
+      const sec = Math.max(0, Math.floor(ms / 1000));
+      const hh = p(Math.floor(sec / 3600));
+      const mm = p(Math.floor((sec % 3600) / 60));
+      const ss = p(sec % 60);
+      return hh + ":" + mm + ":" + ss;
+    }
+
+    function showCancelledToast(invoice) {
+      toastBody.textContent = "Booking #" + invoice + " auto-cancelled — payment not received";
+      toast.show();
+    }
+
+    function setCancelled(row, invoice) {
+      row.dataset.status = "cancelled";
+      row.classList.add("auto-cancelled-row");
+      const statusEl = row.querySelector(".hold-status");
+      if (statusEl) {
+        statusEl.className = "status badge-cancelled";
+        statusEl.textContent = "Cancelled";
+        statusEl.removeAttribute("data-bs-toggle");
+        statusEl.removeAttribute("data-bs-title");
+      }
+      if (!row.dataset.cancelNotified) {
+        row.dataset.cancelNotified = "1";
+        showCancelledToast(invoice);
+      }
+    }
+
+    holdRows.forEach((row) => {
+      const invoice = row.dataset.invoice || row.children[1].textContent.trim();
+      if (!stored[invoice]) {
+        const offset = defaultOffsets[invoice] || (60 * 60 * 1000);
+        stored[invoice] = Date.now() - offset;
+      }
+    });
+    localStorage.setItem(storageKey, JSON.stringify(stored));
+
+    function renderWarning(nearExpiryCount) {
+      warningMount.innerHTML = "";
+      if (nearExpiryCount > 0) {
+        const plural = nearExpiryCount > 1 ? "bookings expire" : "booking expires";
+        warningMount.innerHTML = '<div class="alert alert-warning alert-dismissible fade show expiry-warning mb-3" role="alert">? Warning: ' + nearExpiryCount + " " + plural + ' in less than 30 minutes! Complete payment now.<button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>';
+      }
+    }
+
+    function tickCountdowns() {
+      const cache = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      let nearExpiryCount = 0;
+      holdRows.forEach((row) => {
+        const invoice = row.dataset.invoice || row.children[1].textContent.trim();
+        if (row.dataset.status !== "hold") return;
+        const reservedAt = cache[invoice];
+        if (!reservedAt) return;
+        const remaining = (reservedAt + HOLD_MS) - Date.now();
+        const statusEl = row.querySelector(".hold-status");
+        if (!statusEl) return;
+
+        statusEl.setAttribute("data-bs-toggle", "tooltip");
+        statusEl.setAttribute("data-bs-title", "Auto-cancels if payment not received");
+        statusEl.textContent = "Hold " + formatDuration(remaining);
+
+        if (remaining <= 30 * 60 * 1000 && remaining > 0) {
+          nearExpiryCount += 1;
+        }
+
+        if (remaining <= 0) {
+          setCancelled(row, invoice);
+        }
+      });
+      renderWarning(nearExpiryCount);
+      document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((el) => {
+        bootstrap.Tooltip.getOrCreateInstance(el);
+      });
+    }
+
+    tickCountdowns();
+    setInterval(tickCountdowns, 1000);
+  </script>
+</body>
+</html>
+
+
+

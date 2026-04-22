@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Vendors | Air Arabian Travels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root{--primary-red:#C0392B;--dark-red:#8B0000;--gold:#FFD700;--gold-gradient:linear-gradient(135deg,#FFD700,#FFA500);--dark-bg:#0a0a0a;--soft-bg:#f5f5f5;}
+    body{margin:0;font-family:"Poppins",sans-serif;background:var(--soft-bg);} .sidebar{width:240px;position:fixed;inset:0 auto 0 0;background:var(--dark-bg);padding:16px 0;overflow-y:auto;z-index:1040;transition:transform .3s;}
+    .sidebar-logo{padding:0 18px 14px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:12px;} .sidebar-logo img{height:40px;}
+    .sidebar-nav{list-style:none;margin:0;padding:0;} .sidebar-link{display:flex;gap:10px;align-items:center;color:#fff;text-decoration:none;padding:11px 16px;border-left:3px solid transparent;}
+    .sidebar-link i{color:var(--gold);} .sidebar-link:hover,.sidebar-link.active{color:var(--gold);} .sidebar-link.active{border-left-color:var(--gold);background:rgba(255,215,0,.08);}
+    .content{margin-left:240px;min-height:100vh;} .topbar{background:#fff;padding:14px 24px;box-shadow:0 4px 14px rgba(0,0,0,.08);position:sticky;top:0;z-index:1020;}
+    .clock-pill{background:var(--gold-gradient);padding:8px 14px;border-radius:999px;font-weight:700;} .admin-badge{background:var(--primary-red);color:#fff;padding:6px 10px;border-radius:999px;font-weight:700;font-size:.72rem;}
+    .main{padding:22px;} .card-box{background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:18px;}
+    .tab-btn{border:1px solid #212529;background:#fff;color:#212529;font-weight:600;} .tab-btn.active{background:var(--gold);border-color:var(--gold);color:#111;}
+    .admin-table thead th{background:var(--dark-red);color:var(--gold);border:none;white-space:nowrap;font-size:.82rem;} .admin-table td{vertical-align:middle;font-size:.84rem;white-space:nowrap;}
+    .status{padding:5px 10px;border-radius:999px;font-size:.74rem;font-weight:600;display:inline-block;} .pending{background:#fd7e14;color:#111;} .approved{background:var(--gold);color:#111;} .rejected{background:#dc3545;color:#fff;}
+    .sidebar-toggle{display:none;border:none;background:transparent;font-size:1.35rem;} .sidebar-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1035;}
+    @media (max-width:991.98px){.sidebar{transform:translateX(-100%);} .sidebar.open{transform:translateX(0);} .content{margin-left:0;} .sidebar-toggle{display:inline-flex;} .sidebar-backdrop.show{display:block;} .topbar{padding:12px 14px;} .main{padding:15px;}}
+  </style>
+</head>
+<body>
+  <aside class="sidebar" id="adminSidebar">
+    <div class="sidebar-logo"><img src="../assets/images/logo.png" height="100" style="object-fit:contain;"></div>
+    <ul class="sidebar-nav">
+      <li><a class="sidebar-link" href="dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a class="sidebar-link active" href="vendors.html"><i class="bi bi-people"></i>Manage Vendors</a></li>
+      <li><a class="sidebar-link" href="manage-users.html"><i class="bi bi-person-gear"></i>Manage Users</a></li>
+      <li><a class="sidebar-link" href="tickets.html"><i class="bi bi-ticket-perforated"></i>Manage Tickets</a></li>
+      <li><a class="sidebar-link" href="bookings.html"><i class="bi bi-journal-check"></i>Manage Bookings</a></li>
+      <li><a class="sidebar-link" href="payments.html"><i class="bi bi-cash-coin"></i>Verify Payments</a></li>
+      <li><a class="sidebar-link" href="reports.html"><i class="bi bi-graph-up"></i>Reports</a></li>
+      <li><a class="sidebar-link" href="settings.html"><i class="bi bi-gear"></i>Settings</a></li>
+      <li><a class="sidebar-link" href="../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+    </ul>
+  </aside>
+  <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+  <div class="content">
+    <header class="topbar">
+      <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div class="d-flex align-items-center gap-2"><button class="sidebar-toggle" id="sidebarToggle"><i class="bi bi-list"></i></button><h1 class="h5 fw-bold m-0">Admin Dashboard</h1></div>
+        <div class="d-flex align-items-center gap-2"><span class="clock-pill" id="liveClock"></span><span class="admin-badge">ADMIN</span><span class="fw-semibold">Muneeb Ahmed</span></div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="card-box">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+          <h2 class="h4 fw-bold m-0">Manage Vendors</h2>
+          <input type="search" class="form-control" style="max-width:280px;" placeholder="Search vendors...">
+        </div>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <button class="btn btn-sm tab-btn filter-btn active" data-filter="all">All</button><button class="btn btn-sm tab-btn filter-btn" data-filter="pending">Pending (3)</button><button class="btn btn-sm tab-btn filter-btn" data-filter="approved">Approved</button><button class="btn btn-sm tab-btn filter-btn" data-filter="rejected">Rejected</button>
+        </div>
+        <div class="table-responsive">
+          <table class="table admin-table align-middle mb-0">
+            <thead><tr><th>SR</th><th>AGENCY NAME</th><th>OWNER</th><th>CITY</th><th>EMAIL</th><th>PHONE</th><th>REGISTERED</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Air Link Travels</td><td>Ahmed Ali</td><td>Karachi</td><td>airlink@gmail.com</td><td>0300-1234567</td><td>20-Apr-2026</td><td><span class="status pending">Pending</span></td><td><button class="btn btn-success btn-sm" onclick="approveVendor(this)">Approve</button> <button class="btn btn-danger btn-sm" onclick="rejectVendor(this)">Reject</button> <button class="btn btn-primary btn-sm" onclick="viewVendor(this)">View</button></td></tr>
+              <tr><td>2</td><td>Sky Tours</td><td>Hassan Khan</td><td>Lahore</td><td>sky@gmail.com</td><td>0311-9876543</td><td>19-Apr-2026</td><td><span class="status approved">Approved</span></td><td><button class="btn btn-primary btn-sm" onclick="viewVendor(this)">View</button> <button class="btn btn-warning btn-sm text-white" onclick="suspendVendor(this)">Suspend</button></td></tr>
+              <tr><td>3</td><td>Rehman Travels</td><td>Abdul Rehman</td><td>Islamabad</td><td>rehman@gmail.com</td><td>0321-5555555</td><td>18-Apr-2026</td><td><span class="status pending">Pending</span></td><td><button class="btn btn-success btn-sm" onclick="approveVendor(this)">Approve</button> <button class="btn btn-danger btn-sm" onclick="rejectVendor(this)">Reject</button> <button class="btn btn-primary btn-sm" onclick="viewVendor(this)">View</button></td></tr>
+              <tr><td>4</td><td>Al-Noor Agency</td><td>Noor Ahmed</td><td>Faisalabad</td><td>alnoor@gmail.com</td><td>0333-4444444</td><td>17-Apr-2026</td><td><span class="status approved">Approved</span></td><td><button class="btn btn-primary btn-sm" onclick="viewVendor(this)">View</button> <button class="btn btn-warning btn-sm text-white" onclick="suspendVendor(this)">Suspend</button></td></tr>
+              <tr><td>5</td><td>Bismillah Tours</td><td>Bilal Khan</td><td>Multan</td><td>bismillah@gmail.com</td><td>0345-3333333</td><td>16-Apr-2026</td><td><span class="status rejected">Rejected</span></td><td><button class="btn btn-primary btn-sm" onclick="viewVendor(this)">View</button> <button class="btn btn-secondary btn-sm" onclick="restoreVendor(this)">Restore</button></td></tr>
+              <tr><td>6</td><td>Al-Falah Travels</td><td>Usman Tariq</td><td>Peshawar</td><td>alfalah@gmail.com</td><td>0301-7777711</td><td>15-Apr-2026</td><td><span class="status approved">Approved</span></td><td><button class="btn btn-primary btn-sm" onclick="viewVendor(this)">View</button> <button class="btn btn-warning btn-sm text-white" onclick="suspendVendor(this)">Suspend</button></td></tr>
+              <tr><td>7</td><td>Madina Tours</td><td>Zubair Ahmed</td><td>Sialkot</td><td>madina@gmail.com</td><td>0302-8888822</td><td>14-Apr-2026</td><td><span class="status pending">Pending</span></td><td><button class="btn btn-success btn-sm" onclick="approveVendor(this)">Approve</button> <button class="btn btn-danger btn-sm" onclick="rejectVendor(this)">Reject</button> <button class="btn btn-primary btn-sm" onclick="viewVendor(this)">View</button></td></tr>
+              <tr><td>8</td><td>Al-Haram Travels</td><td>Imran Malik</td><td>Rawalpindi</td><td>alharam@gmail.com</td><td>0303-9999933</td><td>13-Apr-2026</td><td><span class="status approved">Approved</span></td><td><button class="btn btn-primary btn-sm" onclick="viewVendor(this)">View</button> <button class="btn btn-warning btn-sm text-white" onclick="suspendVendor(this)">Suspend</button></td></tr>
+              <tr><td>9</td><td>Rahmania Agency</td><td>Salman Shah</td><td>Hyderabad</td><td>rahmania@gmail.com</td><td>0304-6666644</td><td>12-Apr-2026</td><td><span class="status rejected">Rejected</span></td><td><button class="btn btn-primary btn-sm" onclick="viewVendor(this)">View</button> <button class="btn btn-secondary btn-sm" onclick="restoreVendor(this)">Restore</button></td></tr>
+              <tr><td>10</td><td>Falcon Travel</td><td>Junaid Raza</td><td>Quetta</td><td>falcon@gmail.com</td><td>0305-2222255</td><td>11-Apr-2026</td><td><span class="status approved">Approved</span></td><td><button class="btn btn-primary btn-sm" onclick="viewVendor(this)">View</button> <button class="btn btn-warning btn-sm text-white" onclick="suspendVendor(this)">Suspend</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const liveClock=document.getElementById("liveClock"),dayNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"],pad=n=>String(n).padStart(2,"0");
+    function updateClock(){const now=new Date();liveClock.textContent=dayNames[now.getDay()]+" "+pad(now.getHours())+":"+pad(now.getMinutes())+":"+pad(now.getSeconds())+" | "+monthNames[now.getMonth()]+" "+now.getDate()+"/"+now.getFullYear();}
+    updateClock();setInterval(updateClock,1000);
+    const sidebar=document.getElementById("adminSidebar"),toggle=document.getElementById("sidebarToggle"),backdrop=document.getElementById("sidebarBackdrop");
+    function closeSidebar(){sidebar.classList.remove("open");backdrop.classList.remove("show");}
+    toggle.addEventListener("click",()=>{sidebar.classList.toggle("open");backdrop.classList.toggle("show");});backdrop.addEventListener("click",closeSidebar);window.addEventListener("resize",()=>{if(window.innerWidth>991){closeSidebar();}});
+    function approveVendor(btn){
+      if(confirm('Approve this vendor?')){
+        const row = btn.closest('tr');
+        const vendorName = row.cells[1].textContent.trim();
+        const vendorEmail = row.cells[4].textContent.trim();
+
+        const badge = row.querySelector('.badge, .status-badge, .status');
+        if(badge){
+          badge.textContent = 'Approved';
+          badge.style.background = '#FFD700';
+          badge.style.color = '#000';
+        }
+
+        btn.closest('td').innerHTML =
+        '<button onclick="viewVendor(this)" '+
+        'class="btn btn-sm" '+
+        'style="background:#1a1a1a;color:#FFD700;border:1px solid #FFD700;">'+
+        'View</button> '+
+        '<button onclick="suspendVendor(this)" '+
+        'class="btn btn-sm ms-1" '+
+        'style="background:#FFA500;color:#000;">'+
+        'Suspend</button>';
+
+        alert('Vendor Approved!\n\n'+
+        'Vendor: '+vendorName+'\n'+
+        'Email: '+vendorEmail+'\n\n'+
+        'Approval email sent to vendor!\n'+
+        'Vendor can now login to dashboard.');
+      }
+    }
+
+    function rejectVendor(btn){
+      const reason = prompt('Enter rejection reason:','Documents incomplete');
+      if(reason !== null){
+        const row = btn.closest('tr');
+        const vendorName = row.cells[1].textContent.trim();
+        const vendorEmail = row.cells[4].textContent.trim();
+
+        const badge = row.querySelector('.badge, .status-badge, .status');
+        if(badge){
+          badge.textContent = 'Rejected';
+          badge.style.background = '#C0392B';
+          badge.style.color = '#fff';
+        }
+
+        btn.closest('td').innerHTML =
+        '<button onclick="viewVendor(this)" '+
+        'class="btn btn-sm" '+
+        'style="background:#1a1a1a;color:#FFD700;border:1px solid #FFD700;">'+
+        'View</button>';
+
+        alert('Vendor Rejected!\n\n'+
+        'Vendor: '+vendorName+'\n'+
+        'Reason: '+reason+'\n\n'+
+        'Rejection email sent to vendor!');
+      }
+    }
+    function viewVendor(btn){
+      const row = btn.closest('tr');
+      alert('Vendor: '+row.cells[1].textContent);
+    }
+    function suspendVendor(btn){
+      if(confirm('Suspend this vendor?')){
+        const row = btn.closest('tr');
+        const badge = row.querySelector('.badge, .status-badge, .status');
+        if(badge){ badge.textContent='Suspended'; badge.style.background='#FFA500'; badge.style.color='#000'; }
+        alert('Vendor Suspended!');
+      }
+    }
+    function restoreVendor(btn){
+      if(confirm('Restore this vendor?')){
+        const row = btn.closest('tr');
+        const badge = row.querySelector('.badge, .status-badge, .status');
+        if(badge){ badge.textContent='Approved'; badge.style.background='#FFD700'; badge.style.color='#000'; }
+        alert('Vendor Restored!');
+      }
+    }
+      document.addEventListener('DOMContentLoaded', function(){
+      const filterBtns = document.querySelectorAll('.filter-btn, [data-filter], .nav-pills .nav-link');
+      const rows = document.querySelectorAll('tbody tr');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function(){
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+
+          const filter = this.textContent.trim().toLowerCase().replace(/\s*\(\d+\)/, '');
+
+          rows.forEach(row => {
+            const badge = row.querySelector('.badge, .status');
+            const status = badge?.textContent.trim().toLowerCase();
+
+            if(filter === 'all'){
+              row.style.display = '';
+            } else {
+              row.style.display = status?.includes(filter) ? '' : 'none';
+            }
+          });
+        });
+      });
+
+      const searchInput = document.querySelector('input[type="search"], input[placeholder*="Search"]');
+      if(searchInput){
+        searchInput.addEventListener('input', function(){
+          const val = this.value.toLowerCase();
+          rows.forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(val) ? '' : 'none';
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports | Air Arabian Travels</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root{--gold:#FFD700;--dark:#0a0a0a;--dark-red:#8B0000;}
+    body{margin:0;font-family:Poppins,sans-serif;background:#f5f5f5}.sidebar{width:240px;position:fixed;inset:0 auto 0 0;background:var(--dark);padding:16px 0}
+    .sidebar-link{display:flex;gap:10px;align-items:center;color:#fff;text-decoration:none;padding:11px 16px;border-left:3px solid transparent}.sidebar-link i{color:var(--gold)}
+    .sidebar-link.active,.sidebar-link:hover{color:var(--gold)}.sidebar-link.active{border-left-color:var(--gold);background:rgba(255,215,0,.08)}
+    .content{margin-left:240px}.topbar{background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.08);padding:14px 24px}.main{padding:22px}.cardx{background:#fff;border-radius:14px;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:16px}
+    .admin-table thead th{background:var(--dark-red);color:var(--gold)}
+  </style>
+</head>
+<body>
+  <aside class="sidebar"><div class="px-3 pb-3 border-bottom border-secondary-subtle"><img src="../assets/images/logo.png" alt="Air Arabian Travels" height="40" style="object-fit:contain;max-width:150px;display:block;"></div>
+    <ul class="list-unstyled m-0 pt-2">
+      <li><a class="sidebar-link" href="dashboard.html"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+      <li><a class="sidebar-link" href="vendors.html"><i class="bi bi-people"></i>Manage Vendors</a></li>
+      <li><a class="sidebar-link" href="manage-users.html"><i class="bi bi-person-gear"></i>Manage Users</a></li>
+      <li><a class="sidebar-link" href="tickets.html"><i class="bi bi-ticket-perforated"></i>Manage Tickets</a></li>
+      <li><a class="sidebar-link" href="bookings.html"><i class="bi bi-journal-check"></i>Manage Bookings</a></li>
+      <li><a class="sidebar-link" href="payments.html"><i class="bi bi-cash-coin"></i>Verify Payments</a></li>
+      <li><a class="sidebar-link active" href="reports.html"><i class="bi bi-graph-up"></i>Reports</a></li>
+      <li><a class="sidebar-link" href="settings.html"><i class="bi bi-gear"></i>Settings</a></li>
+      <li><a class="sidebar-link" href="../auth/login.html"><i class="bi bi-box-arrow-right"></i>Logout</a></li>
+    </ul>
+  </aside>
+  <div class="content"><div class="topbar"><h1 class="h5 m-0 fw-bold">Admin Dashboard</h1></div><main class="main">
+    <h2 style="color:#FFD700" class="fw-bold mb-3">Reports</h2>
+    <div class="row g-3 mb-3">
+      <div class="col-md-3"><div class="cardx"><div>Total Revenue</div><div class="fw-bold" style="color:#FFD700">PKR 12.5M</div></div></div>
+      <div class="col-md-3"><div class="cardx"><div>Total Bookings</div><div class="fw-bold" style="color:#0d6efd">1,284</div></div></div>
+      <div class="col-md-3"><div class="cardx"><div>Active Vendors</div><div class="fw-bold" style="color:#198754">49</div></div></div>
+      <div class="col-md-3"><div class="cardx"><div>This Month</div><div class="fw-bold" style="color:#fd7e14">PKR 2.3M</div></div></div>
+    </div>
+    <div class="cardx mb-3"><canvas id="barChart" height="100"></canvas></div>
+    <div class="cardx"><div class="table-responsive"><table class="table admin-table"><thead><tr><th>Invoice</th><th>Vendor</th><th>Amount</th><th>Status</th></tr></thead><tbody><tr><td>AAT-1201</td><td>Air Link Travels</td><td>PKR 85,000</td><td>Verified</td></tr><tr><td>AAT-1202</td><td>Sky Tours</td><td>PKR 525,000</td><td>Pending</td></tr><tr><td>AAT-1203</td><td>Al-Noor Agency</td><td>PKR 92,000</td><td>Verified</td></tr></tbody></table></div></div>
+  </main></div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    new Chart(document.getElementById('barChart'),{type:'bar',data:{labels:['Jan','Feb','Mar','Apr','May','Jun'],datasets:[{label:'Revenue (PKR M)',data:[1.2,1.6,1.9,2.3,2.1,3.4],backgroundColor:'#FFD700'}]}});
+  </script>
+</body>
+</html>
+
